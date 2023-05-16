@@ -1,13 +1,24 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 $dark_purple: #5C2DD5;
 $purple: #7945FF;
 $pink: #FD6687;
 $yellow: #FFCE67;
+$font_grey: #575757;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: black;
+}
+
+p {
+    color: $font_grey;
+    font-weight: normal;
+}
+
 
 @import "home.scss";
 @import "rule.scss";
