@@ -1,0 +1,58 @@
+#Rules {
+    height: 100vh;
+    width: 100vw;
+    background-color: $purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    section {
+        @include border;
+        border-radius: 40px;
+        background-color: white;
+        width: 90%;
+        height: 70%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        position: relative;
+
+        p {
+            font-size: 16px;
+            line-height: 20px;
+        }
+
+        h1 {
+            font-size: 56px;
+            text-align: center;
+        }
+
+        article {
+            h2 {
+                color: $purple;
+                margin-bottom: 15px;
+            }
+
+            ol {
+                margin-left: 20px;
+                line-height: 45px;
+            }
+        }
+    }
+
+    section a:last-child {
+        position: absolute;
+        height: 75px;
+        width: 75px;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+}
