@@ -1,0 +1,28 @@
+#Game {
+    background-color: $purple;
+    width: 100vw;
+    height: 100vh;
+    padding: 0 20px;
+    // position: relative;
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 50px 0;
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+
+        .btn_nav {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            background-color: $dark_purple;
+            padding: 10px 20px;
+        }
+    }
+}

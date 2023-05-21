@@ -48,10 +48,12 @@
         top: 100%;
         left: 50%;
         transform: translate(-50%, -50%);
+        border-radius: 50px;
 
         img {
             height: 100%;
             width: 100%;
+            border-radius: 50px;
         }
     }
 
