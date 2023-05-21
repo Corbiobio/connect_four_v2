@@ -1,0 +1,53 @@
+#Home {
+    background-color: $purple;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+
+    nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            height: 70px;
+            width: 70px;
+        }
+
+        div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 100px;
+            width: 100%;
+
+            .btn {
+                @include border;
+                display: flex;
+                background-color: white;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px;
+                width: 90%;
+                height: 80px;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 24px;
+                line-height: 30px;
+
+                img {
+                    height: 100%;
+                    width: auto;
+                }
+            }
+        }
+
+        div a:nth-child(1) {
+            background-color: $yellow;
+            margin-bottom: 50px;
+        }
+    }
+
+}

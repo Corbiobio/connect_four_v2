@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 
 export default function App() {
     return (
-        <main>
+        <main id='Home'>
             <nav>
                 <img src="/images/logo.svg" alt="logo" />
                 <div>
-                    <button><Link to="/game" >Payer vs PLayer </Link><img src="./player-vs-player.svg" alt="player vs player" /></button>
-                    <button><Link to="/rules">Game rules</Link></button>
+                    <Link to="/game" className='btn'>Payer vs PLayer <img src="images/player-vs-player.svg" alt="player vs player" /></Link>
+                    <Link to="/rules" className='btn'>Game rules</Link>
                 </div>
             </nav>
-        </main>
+        </main >
     )
 }
