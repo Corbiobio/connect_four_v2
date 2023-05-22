@@ -20,6 +20,15 @@ export default function Game() {
                     <strong>0</strong>
                     <img src="/images/player-two.svg" alt="smiling face" />
                 </div>
+                <div className='marker_container'>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                    <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
+                </div>
                 <div className='board'>
                     <img src="/images/board-layer-white-small.svg" alt="board" />
                     <img src="/images/board-layer-black-small.svg" alt="board" />

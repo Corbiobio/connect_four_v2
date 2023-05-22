@@ -27,7 +27,7 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 0.5fr;
         grid-column-gap: 0px;
-        grid-row-gap: 50px;
+        // grid-row-gap: 50px;
         justify-items: center;
 
         .player {
@@ -76,11 +76,32 @@
             }
         }
 
+        .marker_container {
+            grid-area: 2 / 1 / 3 / 3;
+            width: 335px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: 1fr;
+            grid-column-gap: 6px;
+            justify-items: center;
+            padding: 0 8px;
+            margin: 15px 0 3px 0;
+
+            .column_marker {
+                width: 38px;
+                height: 36px;
+
+                img {
+                    display: none;
+                }
+            }
+        }
+
         .board {
             width: 335px;
             height: 320px;
             position: relative;
-            grid-area: 2 / 1 / 3 / 3;
+            grid-area: 3 / 1 / 4 / 3;
             z-index: 1;
 
             img {
@@ -126,7 +147,8 @@
     .bottom {
         background-color: $dark_purple;
         width: 100%;
-        height: calc(100vh - 568px);
+        // taille ecran - taille nav +taille game - translate
+        height: calc(100vh - calc(141px + 461px - 30px));
         transform: translateY(-30px);
         border-radius: 60px 60px 0px 0px;
         z-index: -1;
