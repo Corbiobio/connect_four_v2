@@ -8,7 +8,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        padding: 40px 0;
+        padding: 30px 0;
 
         .btn_nav {
             text-decoration: none;
@@ -19,6 +19,11 @@
             background-color: $dark_purple;
             padding: 10px 20px;
             width: 100px;
+        }
+
+        img {
+            height: 55px;
+            width: 55px;
         }
     }
 
@@ -85,7 +90,7 @@
             grid-column-gap: 6px;
             justify-items: center;
             padding: 0 8px;
-            margin: 15px 0 3px 0;
+            margin: 12px 0 3px 0;
 
             .column_marker {
                 width: 38px;
@@ -102,18 +107,11 @@
             height: 320px;
             position: relative;
             grid-area: 3 / 1 / 4 / 3;
-            z-index: 1;
 
-            img {
-                position: absolute;
-            }
-
-            img:nth-child(1) {
-                z-index: 3;
-            }
 
             img:nth-child(2) {
-                z-index: 1;
+                z-index: 3;
+                position: absolute;
             }
 
             .board_game {
@@ -124,6 +122,8 @@
                 grid-template-columns: repeat(7, 1fr);
                 grid-template-rows: 1fr;
                 grid-column-gap: 6px;
+                position: absolute;
+                z-index: 2;
 
                 .column {
                     display: grid;
@@ -131,27 +131,78 @@
                     grid-template-rows: repeat(6, 1fr);
                     grid-column-gap: 0px;
                     grid-row-gap: 0px;
-                    gap: 6.3px;
+                    // gap: 6.3px;
 
                     .item {
-                        img {
-                            z-index: 2;
+                        z-index: 2;
+                        width: 41px;
+                        height: 46px;
+                    }
+
+                }
+
+            }
+
+            .column_for_marker {
+                @extend .board_game;
+                z-index: 4;
+            }
+
+            img:nth-child(4) {
+                z-index: 1;
+                position: absolute;
+            }
+
+            .board_bottom {
+                height: 120px;
+                width: 140px;
+                position: absolute;
+                z-index: 5;
+                top: 100%;
+                left: 50%;
+                transform: translate(-50%, -29%);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                }
+
+                div {
+                    position: relative;
+                    padding-top: 30px;
+                    text-align: center;
+
+                    p {
+                        color: black;
+                        font-size: 15px;
+                    }
+
+                    strong {
+                        font-size: 40px;
+
+                        span {
+                            font-size: 25px;
                         }
                     }
+
                 }
             }
         }
-
     }
 
     .bottom {
         background-color: $dark_purple;
         width: 100%;
         // taille ecran - taille nav +taille game - translate
-        height: calc(100vh - calc(141px + 461px - 30px));
+        height: calc(100vh - calc(115px + 458px - 30px));
         transform: translateY(-30px);
         border-radius: 60px 60px 0px 0px;
         z-index: -1;
     }
 
+}
+
+.column_for_marker :hover {
+    background-color: red;
 }

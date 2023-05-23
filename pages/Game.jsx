@@ -30,12 +30,20 @@ export default function Game() {
                     <div className='column_marker'><img src="/images/marker-red.svg" alt="" /></div>
                 </div>
                 <div className='board'>
+                    <div className='column_for_marker'>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                     <img src="/images/board-layer-white-small.svg" alt="board" />
-                    <img src="/images/board-layer-black-small.svg" alt="board" />
                     <div className='board_game'>
                         <div className='column'>
                             <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                             <div className="item"></div>
                             <div className="item"></div>
                             <div className="item"></div>
@@ -90,10 +98,17 @@ export default function Game() {
                             <div className="item"></div>
                         </div>
                     </div>
+                    <img src="/images/board-layer-black-small.svg" alt="board" />
+                    <div className='board_bottom'>
+                        <img src="/images/turn-background-red.svg" alt="red triangle" />
+                        <div>
+                            <p>player 2's turn</p>
+                            <strong>0<span>s</span></strong>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='bottom'>
-
             </div>
         </main >
     )
