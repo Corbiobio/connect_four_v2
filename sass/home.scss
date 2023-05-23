@@ -57,9 +57,9 @@
         justify-content: center;
 
         nav {
+            @include border;
             max-width: 650px;
             width: 80%;
-            @include border;
             background-color: $purple;
             padding: 50px 0;
         }
