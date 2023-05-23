@@ -158,9 +158,13 @@
             grid-area: 3 / 1 / 4 / 3;
 
 
-            img:nth-child(2) {
+            .board_white {
                 z-index: 3;
                 position: absolute;
+            }
+
+            .board_white_large {
+                display: none;
             }
 
             .board_game {
@@ -197,9 +201,13 @@
                 z-index: 4;
             }
 
-            img:nth-child(4) {
+            .board_black {
                 z-index: 1;
                 position: absolute;
+            }
+
+            .board_black_large {
+                display: none;
             }
 
             .board_bottom {
@@ -247,11 +255,50 @@
         height: calc(100vh - calc(115px + 458px - 30px));
         transform: translateY(-30px);
         border-radius: 60px 60px 0px 0px;
-        z-index: -1;
     }
 
 }
 
 .column_for_marker :hover {
     background-color: red;
+}
+
+@media screen and (min-width:750px) {
+    #Game {
+        height: 100%;
+        width: 100%;
+
+        .game {
+
+            .board {
+                height: 584px;
+                width: 632px;
+
+                .board_white_small {
+                    display: none;
+                }
+
+                .board_black_small {
+                    display: none;
+                }
+
+                .board_white_large {
+                    display: block;
+                }
+
+                .board_black_large {
+                    display: block;
+                }
+
+                .board_game {
+                    padding: 17px 17px 59px 17px;
+                }
+            }
+        }
+
+        .bottom {
+            height: calc(100% - calc(115px + 722px));
+            transform: none;
+        }
+    }
 }

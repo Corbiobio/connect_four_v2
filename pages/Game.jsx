@@ -50,7 +50,8 @@ export default function Game() {
                         <div></div>
                         <div></div>
                     </div>
-                    <img src="/images/board-layer-white-small.svg" alt="board" />
+                    <img className='board_white board_white_small' src="/images/board-layer-white-small.svg" alt="board" />
+                    <img className='board_white board_white_large' src="/images/board-layer-white-large.svg" alt="board" />
                     <div className='board_game'>
                         <div className='column'>
                             <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
@@ -109,7 +110,9 @@ export default function Game() {
                             <div className="item"></div>
                         </div>
                     </div>
-                    <img src="/images/board-layer-black-small.svg" alt="board" />
+                    <img className='board_black board_black_small' src="/images/board-layer-black-small.svg" alt="board" />
+                    <img className='board_black board_black_large' src="/images/board-layer-black-large.svg" alt="board" />
+
                     <div className='board_bottom'>
                         <img src="/images/turn-background-red.svg" alt="red triangle" />
                         <div>
