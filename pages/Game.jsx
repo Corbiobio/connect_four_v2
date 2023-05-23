@@ -1,8 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Game() {
     return (
         <main id='Game'>
+
+            {/* <div className='menu'>
+                <div className='menu_btn_container'>
+                    <p>pause</p>
+                    <div className='btn_menu'>continue game</div>
+                    <div className='btn_menu'>restart</div>
+                    <Link className='btn_menu btn_menu_pink' to="/">quit game</Link>
+                </div>
+            </div> */}
+
             <nav>
                 <button className='btn_nav'>menu</button>
                 <img src="/images/logo.svg" alt="logo" />
