@@ -50,3 +50,18 @@
         }
     }
 }
+
+@media screen and (min-width:500px) {
+    #Home {
+        background-color: $dark_purple;
+        justify-content: center;
+
+        nav {
+            max-width: 650px;
+            width: 80%;
+            @include border;
+            background-color: $purple;
+            padding: 50px 0;
+        }
+    }
+}
