@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom"
-import Game from "./Game"
+import Home from "./Home"
 
 function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={<Game />} />
+                <Route path="/" element={<Home />} />
             </Routes>
         </div>
     )
