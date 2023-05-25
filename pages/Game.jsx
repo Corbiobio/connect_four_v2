@@ -54,61 +54,63 @@ export default function Game() {
                     <img className='board_white board_white_large' src="/images/board-layer-white-large.svg" alt="board" />
                     <div className='board_game'>
                         <div className='column'>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                        </div>
+                        <div className='column'>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                        </div>
+                        <div className='column'>
                             <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                             <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                         </div>
                         <div className='column'>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                         </div>
                         <div className='column'>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                         </div>
                         <div className='column'>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                         </div>
                         <div className='column'>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
                         </div>
-                        <div className='column'>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                        </div>
-                        <div className='column'>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                            <div className="item"></div>
-                        </div>
+
+
                     </div>
                     <img className='board_black board_black_small' src="/images/board-layer-black-small.svg" alt="board" />
                     <img className='board_black board_black_large' src="/images/board-layer-black-large.svg" alt="board" />
