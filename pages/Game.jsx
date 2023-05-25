@@ -16,15 +16,15 @@ export default function Game() {
         const marker_container = document.getElementById("marker_container")
         let current_marker = parseInt(element.id[element.id.length - 1])
         const marker_column = marker_container.children[current_marker - 1]
+        const marker_column2 = marker_container.children
+        for (let i = 0; i < marker_column2.length; i++) {
+            marker_column2[i].children[0].style.display = "none"
+        }
         marker_column.children[0].style.display = "block"
     }
-    function hide_marker() {
-        const marker_column = marker_container.children
-        console.log(true);
-        for (let i = 0; i < marker_column.length; i++) {
-            marker_column[i].children[0].style.display = "none"
-        }
-
+    function put_coin(element) {
+        const column_click = element.id[element.id.length - 1]
+        console.log(column_click);
     }
     return (
         <main id='Game'>
@@ -67,13 +67,13 @@ export default function Game() {
                 </div>
                 <div className='board'>
                     <div className='column_for_marker'>
-                        <div id='marker1' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
-                        <div id='marker2' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
-                        <div id='marker3' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
-                        <div id='marker4' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
-                        <div id='marker5' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
-                        <div id='marker6' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
-                        <div id='marker7' onMouseOver={element => { display_marker(element.target) }} onMouseLeave={hide_marker}></div>
+                        <div id='marker1' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker2' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker3' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker4' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker5' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker6' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker7' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
                     </div>
 
                     <picture className='board_white'>
