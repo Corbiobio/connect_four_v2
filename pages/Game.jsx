@@ -5,14 +5,14 @@ export default function Game() {
     return (
         <main id='Game'>
 
-            {/* <div className='menu'>
+            <div className='menu'>
                 <div className='menu_btn_container'>
                     <p>pause</p>
                     <div className='btn_menu'>continue game</div>
                     <div className='btn_menu'>restart</div>
                     <Link className='btn_menu btn_menu_pink' to="/">quit game</Link>
                 </div>
-            </div> */}
+            </div>
 
             <nav>
                 <button className='btn_nav'>menu</button>
@@ -50,70 +50,201 @@ export default function Game() {
                         <div></div>
                         <div></div>
                     </div>
-                    <img className='board_white board_white_small' src="/images/board-layer-white-small.svg" alt="board" />
-                    <img className='board_white board_white_large' src="/images/board-layer-white-large.svg" alt="board" />
+
+                    <picture className='board_white'>
+                        <source media='(min-width:750px)' srcSet="/images/board-layer-white-large.svg" />
+                        <img src="/images/board-layer-white-small.svg" alt="board" />
+                    </picture>
+
                     <div className='board_game'>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-large.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
                         <div className='column'>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
-                            <div className="item"><img src="/images/counter-yellow-small.svg" alt="" /></div>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
+                            <picture className="item">
+                                <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
+                                <img src="/images/counter-yellow-small.svg" alt="coin" />
+                            </picture>
                         </div>
-
-
                     </div>
-                    <img className='board_black board_black_small' src="/images/board-layer-black-small.svg" alt="board" />
-                    <img className='board_black board_black_large' src="/images/board-layer-black-large.svg" alt="board" />
+
+                    <picture className='board_black' >
+                        <source media="(min-width:750px)" srcSet="/images/board-layer-black-large.svg" />
+                        <img src="/images/board-layer-black-small.svg" alt="board" />
+                    </picture>
 
                     <div className='board_bottom'>
                         <img src="/images/turn-background-red.svg" alt="red triangle" />

@@ -12,6 +12,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        display: none;
 
         .menu_btn_container {
             @include border;
@@ -163,8 +164,9 @@
                 position: absolute;
             }
 
-            .board_white_large {
-                display: none;
+            .board_black {
+                z-index: 1;
+                position: absolute;
             }
 
             .board_game {
@@ -190,6 +192,7 @@
                         z-index: 2;
                         width: 41px;
                         height: 46px;
+                        display: none
                     }
 
                 }
@@ -199,15 +202,6 @@
             .column_for_marker {
                 @extend .board_game;
                 z-index: 4;
-            }
-
-            .board_black {
-                z-index: 1;
-                position: absolute;
-            }
-
-            .board_black_large {
-                display: none;
             }
 
             .board_bottom {
@@ -309,22 +303,6 @@
             .board {
                 height: 584px;
                 width: 632px;
-
-                .board_white_small {
-                    display: none;
-                }
-
-                .board_black_small {
-                    display: none;
-                }
-
-                .board_white_large {
-                    display: block;
-                }
-
-                .board_black_large {
-                    display: block;
-                }
 
                 .board_game {
                     padding: 17px 17px 59px 17px;
