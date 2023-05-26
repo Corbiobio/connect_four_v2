@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Game() {
-    useEffect(() => { }, [])
 
     function menuClick() {
         const menu = document.getElementById("menu")
@@ -41,7 +40,18 @@ export default function Game() {
         }
     }
 
-
+    let turn_color = true
+    function turn(element) {
+        console.log(turn_color);
+        turn_color = !turn_color
+        console.log(element);
+        // const board_game = document.getElementById("board_game")
+        // const column_click = board_game.children[element.id[element.id.length - 1] - 1]
+        // if (column_click.children[0].classList[0] !== "red" && column_click.children[0].classList[0] !== "yellow") {
+        //     turn_color = !turn_color
+        // }
+    }
+    turn("a")
     return (
         <main id='Game'>
 
@@ -83,13 +93,13 @@ export default function Game() {
                 </div>
                 <div className='board'>
                     <div className='column_for_marker'>
-                        <div id='marker1' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker2' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker3' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker4' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker5' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker6' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker7' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker1' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker2' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker3' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker4' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker5' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker6' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker7' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
                     </div>
 
                     <picture className='board_white'>
