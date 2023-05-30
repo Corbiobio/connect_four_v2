@@ -27,31 +27,38 @@ export default function Game() {
         const board_game = document.getElementById("board_game")
         const column_click = board_game.children[element.id[element.id.length - 1] - 1]
 
-        //if first coin doesnt contain a coin 
-        if (column_click.children[0].classList[0] !== "red" && column_click.children[0].classList[0] !== "yellow") {
-
+        //if first coin is empty
+        if (column_click.children[0].classList[0] === "empty") {
             let i = column_click.children.length - 1
-            //verif if coin is empty (if true put a coin)
             //get index of first coin empty
             while (i >= 0 && column_click.children[i].classList[0] !== "empty") {
                 i--
             }
-            column_click.children[i].className = "red item"
+            if (turn_color === true) {
+                column_click.children[i].className = "red item"
+                column_click.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-red-large.svg\' /><img src=\"/images/counter-red-small.svg\" alt=\"coin\" /></picture >"
+            } else {
+                column_click.children[i].className = "yellow item"
+                column_click.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >"
+            }
+            turn_color = !turn_color
         }
     }
 
+    //true = red | false = yellow
     let turn_color = true
-    function turn(element) {
-        console.log(turn_color);
-        turn_color = !turn_color
-        console.log(element);
-        // const board_game = document.getElementById("board_game")
-        // const column_click = board_game.children[element.id[element.id.length - 1] - 1]
-        // if (column_click.children[0].classList[0] !== "red" && column_click.children[0].classList[0] !== "yellow") {
-        //     turn_color = !turn_color
-        // }
+
+    function game_turn() {
+        let red_img_bottom = "/images/turn-background-red.svg"
+        let yellow_img_bottom = "/images/turn-background-yellow.svg"
+
+        let red_img_marker = "/images/marker-red.svg"
+        let yello_img_marker = "/images/marker-yello.svg"
+
+        // let marker = document.getElementById('marker_container')
+        // console.log(marker);
     }
-    turn("a")
+    console.log(game_turn());
     return (
         <main id='Game'>
 
@@ -93,13 +100,13 @@ export default function Game() {
                 </div>
                 <div className='board'>
                     <div className='column_for_marker'>
-                        <div id='marker1' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker2' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker3' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker4' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker5' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker6' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker7' onClick={element => { turn(element.target); put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker1' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker2' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker3' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker4' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker5' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker6' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='marker7' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
                     </div>
 
                     <picture className='board_white'>
@@ -112,309 +119,136 @@ export default function Game() {
                         <div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
                         </div>
                         <div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
-                        </div>
-                        <div className='column'>
+                        </div><div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
-                        </div>
-                        <div className='column'>
+                        </div><div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
-                        </div>
-                        <div className='column'>
+                        </div><div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
-                        </div>
-                        <div className='column'>
+                        </div><div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
-                        </div>
-                        <div className='column'>
+                        </div><div className='column'>
 
                             <div className="empty item">
-                                <picture>
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
 
                             <div className="empty item">
-                                <picture >
-                                    <source media="(min-width:750px)" srcSet='/images/counter-yellow-large.svg' />
-                                    <img src="/images/counter-yellow-small.svg" alt="coin" />
-                                </picture>
                             </div>
                         </div>
 
@@ -426,7 +260,7 @@ export default function Game() {
                     </picture>
 
                     <div className='board_bottom'>
-                        <img src="/images/turn-background-red.svg" alt="red triangle" />
+                        <img src="/images/turn-background-red.svg" alt="triangle with score" />
                         <div>
                             <p>player 2's turn</p>
                             <strong>0<span>s</span></strong>
