@@ -1,21 +1,23 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+
+import Column from './component/Column'
+import Board_black from './component/Board_black'
+import Board_white from './component/Board_white'
+import Player_one from './component/Player_one'
+import Player_two from './component/Player_two'
+import Nav_bar from './component/Nav_bar'
+import Menu from './component/Menu'
+import Marker_container from './component/Marker_container'
 
 export default function Game() {
 
-    function menuClick() {
-        const menu = document.getElementById("menu")
-        menu.style.display = "flex"
-    }
-    function continue_btn_click() {
-        const menu = document.getElementById("menu")
-        menu.style.display = "none"
-    }
     function display_marker(element) {
         const marker_container = document.getElementById("marker_container")
         let current_marker_position = parseInt(element.id[element.id.length - 1] - 1)
         const marker_column = marker_container.children
+        console.log(marker_container);
         const current_marker_column = marker_container.children[current_marker_position]
+        console.log(current_marker_column);
 
         for (let i = 0; i < marker_column.length; i++) {
             marker_column[i].children[0].style.display = "none"
@@ -41,9 +43,14 @@ export default function Game() {
                 column_click.children[i].className = "yellow item"
                 column_click.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >"
             }
-            turn_color = !turn_color
+            game_turn()
         }
     }
+
+
+    let [img_bottom, setImg_bottom] = useState("/images/turn-background-red.svg")
+    let [img_marker, setImg_marker] = useState("/images/marker-red.svg")
+
 
     //true = red | false = yellow
     let turn_color = true
@@ -53,51 +60,33 @@ export default function Game() {
         let yellow_img_bottom = "/images/turn-background-yellow.svg"
 
         let red_img_marker = "/images/marker-red.svg"
-        let yello_img_marker = "/images/marker-yello.svg"
+        let yellow_img_marker = "/images/marker-yellow.svg"
 
-        // let marker = document.getElementById('marker_container')
-        // console.log(marker);
+        if (turn_color) {
+            setImg_bottom(img_bottom = red_img_bottom)
+            setImg_marker(img_marker = red_img_marker)
+        } else {
+            setImg_bottom(img_bottom = yellow_img_bottom)
+            setImg_marker(img_marker = yellow_img_marker)
+        }
+        console.log(turn_color);
+        turn_color = !turn_color
     }
-    console.log(game_turn());
+
     return (
         <main id='Game'>
 
-            <div className='menu' id='menu' >
-                <div className='menu_btn_container'>
-                    <p>pause</p>
-                    <div onClick={continue_btn_click} className='btn_menu'>continue game</div>
-                    <a href="/game" className='btn_menu'>restart</a>
-                    <Link className='btn_menu btn_menu_pink' to="/">quit game</Link>
-                </div>
-            </div>
+            <Menu />
 
-            <nav>
-                <button className='btn_nav' id='menu_btn' onClick={menuClick} >menu</button>
-                <img src="/images/logo.svg" alt="logo" />
-                <a href="/game" className='btn_nav'>restart</a>
-            </nav>
-
+            <Nav_bar />
             <div className='game'>
-                <div className='player_one player'>
-                    <p>player 1</p>
-                    <strong>0</strong>
-                    <img src="/images/player-one.svg" alt="smiling face" />
-                </div>
 
-                <div className='player_two player'>
-                    <p>player 2</p>
-                    <strong>0</strong>
-                    <img src="/images/player-two.svg" alt="smiling face" />
-                </div>
-                <div className='marker_container' id='marker_container'>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                    <div className='column_marker'><img src="/images/marker-red.svg" alt="marker" /></div>
-                </div>
+                <Player_one />
+
+                <Player_two />
+
+                <Marker_container src_img={img_marker} />
+
                 <div className='board'>
                     <div className='column_for_marker'>
                         <div id='marker1' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
@@ -109,158 +98,24 @@ export default function Game() {
                         <div id='marker7' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
                     </div>
 
-                    <picture className='board_white'>
-                        <source media='(min-width:750px)' srcSet="/images/board-layer-white-large.svg" />
-                        <img src="/images/board-layer-white-small.svg" alt="board" />
-                    </picture>
+                    <Board_white />
 
                     <div className='board_game' id='board_game'>
 
-                        <div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div>
-                        <div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div><div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div><div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div><div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div><div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div><div className='column'>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-
-                            <div className="empty item">
-                            </div>
-                        </div>
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
 
                     </div>
 
-                    <picture className='board_black' >
-                        <source media="(min-width:750px)" srcSet="/images/board-layer-black-large.svg" />
-                        <img src="/images/board-layer-black-small.svg" alt="board" />
-                    </picture>
+                    <Board_black />
 
                     <div className='board_bottom'>
-                        <img src="/images/turn-background-red.svg" alt="triangle with score" />
+                        <img src={img_bottom} alt="triangle with score" />
                         <div>
                             <p>player 2's turn</p>
                             <strong>0<span>s</span></strong>
