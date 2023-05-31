@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import Column from './component/Column'
 import Board_black from './component/Board_black'
@@ -13,22 +13,19 @@ import Board_bottom from './Board_bottom'
 export default function Game() {
 
     function display_marker(element) {
-        const marker_container = document.getElementById("marker_container")
-        let current_marker_position = parseInt(element.id[element.id.length - 1] - 1)
-        const marker_column = marker_container.children
-        console.log(marker_container);
-        const current_marker_column = marker_container.children[current_marker_position]
-        console.log(current_marker_column);
+        let current_column_position = parseInt(element.id)
+        let marker_container_child = marker_containerRef.current.children
 
-        for (let i = 0; i < marker_column.length; i++) {
-            marker_column[i].children[0].style.display = "none"
+        for (let i = 0; i < marker_container_child.length; i++) {
+            marker_container_child[i].children[0].style.display = "none"
+            console.log(marker_container_child[i]);
         }
-        current_marker_column.children[0].style.display = "block"
+        marker_container_child[current_column_position].children[0].style.display = "block"
     }
 
     function put_coin(element) {
         // const board_game = document.getElementById("board_game")
-        const column_click = board_game.children[element.id[element.id.length - 1] - 1]
+        const column_click = board_game.children[element.id[element.id.length - 1]]
 
         //if first coin is empty
         if (column_click.children[0].classList[0] === "empty") {
@@ -52,6 +49,7 @@ export default function Game() {
     let [img_bottom, setImg_bottom] = useState("/images/turn-background-red.svg")
     let [img_marker, setImg_marker] = useState("/images/marker-red.svg")
 
+    let marker_containerRef = useRef(null)
 
     //true = red | false = yellow
     let turn_color = true
@@ -86,17 +84,17 @@ export default function Game() {
 
                 <Player_two />
 
-                <Marker_container src_img={img_marker} />
+                <Marker_container src_img={img_marker} ref_use={marker_containerRef} />
 
                 <div className='board'>
                     <div className='column_for_marker'>
-                        <div id='marker1' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker2' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker3' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker4' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker5' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker6' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
-                        <div id='marker7' onClick={element => { put_coin(element.target) }} onMouseOver={element => { display_marker(element.target) }}></div>
+                        <div id='0' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                        <div id='1' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                        <div id='2' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                        <div id='3' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                        <div id='4' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                        <div id='5' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                        <div id='6' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
                     </div>
 
                     <Board_white />
