@@ -8,9 +8,19 @@ import Player_two from './component/Player_two'
 import Nav_bar from './component/Nav_bar'
 import Menu from './component/Menu'
 import Marker_container from './component/Marker_container'
-import Board_bottom from './Board_bottom'
+import Board_bottom from './component/Board_bottom'
 
 export default function Game() {
+
+    //true = red | false = yellow
+    let turn_color = true
+
+    let [img_bottom, setImg_bottom] = useState("/images/turn-background-red.svg")
+    let [img_marker, setImg_marker] = useState("/images/marker-red.svg")
+
+    let marker_containerRef = useRef(null)
+    let board_gameRef = useRef(null)
+
 
     function display_marker(element) {
         let current_column_position = parseInt(element.id)
@@ -18,58 +28,62 @@ export default function Game() {
 
         for (let i = 0; i < marker_container_child.length; i++) {
             marker_container_child[i].children[0].style.display = "none"
-            console.log(marker_container_child[i]);
         }
+
         marker_container_child[current_column_position].children[0].style.display = "block"
     }
 
     function put_coin(element) {
-        // const board_game = document.getElementById("board_game")
-        const column_click = board_game.children[element.id[element.id.length - 1]]
+        let column_id = parseInt(element.id)
+        let board_current_column = board_gameRef.current.children[column_id]
 
         //if first coin is empty
-        if (column_click.children[0].classList[0] === "empty") {
-            let i = column_click.children.length - 1
+        if (board_current_column.children[0].classList[0] === "empty") {
+
+            let i = board_current_column.children.length - 1
             //get index of first coin empty
-            while (i >= 0 && column_click.children[i].classList[0] !== "empty") {
+            while (i >= 0 && board_current_column.children[i].classList[0] !== "empty") {
                 i--
             }
-            if (turn_color === true) {
-                column_click.children[i].className = "red item"
-                column_click.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-red-large.svg\' /><img src=\"/images/counter-red-small.svg\" alt=\"coin\" /></picture >"
+            if (turn_color) {
+                board_current_column.children[i].className = "red item"
+                board_current_column.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-red-large.svg\' /><img src=\"/images/counter-red-small.svg\" alt=\"coin\" /></picture >"
             } else {
-                column_click.children[i].className = "yellow item"
-                column_click.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >"
+                board_current_column.children[i].className = "yellow item"
+                board_current_column.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >"
             }
             game_turn()
         }
     }
 
 
-    let [img_bottom, setImg_bottom] = useState("/images/turn-background-red.svg")
-    let [img_marker, setImg_marker] = useState("/images/marker-red.svg")
-
-    let marker_containerRef = useRef(null)
-
-    //true = red | false = yellow
-    let turn_color = true
 
     function game_turn() {
+        turn_color = !turn_color
+        console.log(turn_color);
+
         let red_img_bottom = "/images/turn-background-red.svg"
         let yellow_img_bottom = "/images/turn-background-yellow.svg"
 
         let red_img_marker = "/images/marker-red.svg"
         let yellow_img_marker = "/images/marker-yellow.svg"
 
+
         if (turn_color) {
-            setImg_bottom(img_bottom = red_img_bottom)
-            setImg_marker(img_marker = red_img_marker)
+            img_bottom = red_img_bottom
+            img_marker = red_img_marker
         } else {
-            setImg_bottom(img_bottom = yellow_img_bottom)
-            setImg_marker(img_marker = yellow_img_marker)
+            img_bottom = yellow_img_bottoms
+            img_marker = yellow_img_marker
         }
-        console.log(turn_color);
-        turn_color = !turn_color
+
+        // https://react.dev/reference/react/useState#usestate
+
+        // console.log(img_bottom);
+        // console.log(img_marker);
+        // setImg_bottom()
+        // setImg_marker()
+
     }
 
     return (
@@ -99,7 +113,7 @@ export default function Game() {
 
                     <Board_white />
 
-                    <div className='board_game' id='board_game'>
+                    <div className='board_game' ref={board_gameRef}>
 
                         <Column />
                         <Column />
