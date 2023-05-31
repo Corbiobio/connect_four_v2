@@ -8,6 +8,7 @@ import Player_two from './component/Player_two'
 import Nav_bar from './component/Nav_bar'
 import Menu from './component/Menu'
 import Marker_container from './component/Marker_container'
+import Board_bottom from './Board_bottom'
 
 export default function Game() {
 
@@ -26,7 +27,7 @@ export default function Game() {
     }
 
     function put_coin(element) {
-        const board_game = document.getElementById("board_game")
+        // const board_game = document.getElementById("board_game")
         const column_click = board_game.children[element.id[element.id.length - 1] - 1]
 
         //if first coin is empty
@@ -114,13 +115,7 @@ export default function Game() {
 
                     <Board_black />
 
-                    <div className='board_bottom'>
-                        <img src={img_bottom} alt="triangle with score" />
-                        <div>
-                            <p>player 2's turn</p>
-                            <strong>0<span>s</span></strong>
-                        </div>
-                    </div>
+                    <Board_bottom src_img={img_bottom} />
                 </div>
             </div>
             <div className='bottom'>
