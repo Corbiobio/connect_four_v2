@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useReducer, useRef, useState } from 'react'
 
 import Column from './component/Column'
 import Board_black from './component/Board_black'
@@ -15,8 +15,6 @@ export default function Game() {
     //true = red | false = yellow
     let turn_color = true
 
-    let [img_bottom, setImg_bottom] = useState("/images/turn-background-red.svg")
-    let [img_marker, setImg_marker] = useState("/images/marker-red.svg")
 
     let marker_containerRef = useRef(null)
     let board_gameRef = useRef(null)
@@ -56,26 +54,49 @@ export default function Game() {
         }
     }
 
+    let [img_bottom, dispatch_bottom] = useReducer(change_bottom_src, "/images/turn-background-red.svg")
+    let [img_marker, dispatch_marker] = useReducer(change_marker_src, "/images/marker-red.svg")
 
-
-    function game_turn() {
-        turn_color = !turn_color
-        console.log(turn_color);
-
+    function change_bottom_src(initiale_value, user_action) {
         let red_img_bottom = "/images/turn-background-red.svg"
         let yellow_img_bottom = "/images/turn-background-yellow.svg"
-
+        if (turn_color) {
+            return red_img_bottom
+        } else {
+            return yellow_img_bottom
+        }
+        turn_color = !turn_color
+    }
+    function change_marker_src(initiale_value, user_action) {
         let red_img_marker = "/images/marker-red.svg"
         let yellow_img_marker = "/images/marker-yellow.svg"
 
 
-        if (turn_color) {
-            img_bottom = red_img_bottom
-            img_marker = red_img_marker
-        } else {
-            img_bottom = yellow_img_bottoms
-            img_marker = yellow_img_marker
-        }
+    }
+    function game_turn() {
+        // turn_color = !turn_color
+        console.log(turn_color);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // if (turn_color) {
+        //     setImg_bottom(img_bottom = red_img_bottom)
+        //     setImg_marker(img_marker = red_img_marker)
+        // } else {
+        //     setImg_bottom(img_bottom = yellow_img_bottom)
+        //     setImg_marker(img_marker = yellow_img_marker)
+        // }
 
         // https://react.dev/reference/react/useState#usestate
 
@@ -92,6 +113,7 @@ export default function Game() {
             <Menu />
 
             <Nav_bar />
+
             <div className='game'>
 
                 <Player_one />
@@ -101,7 +123,7 @@ export default function Game() {
                 <Marker_container src_img={img_marker} ref_use={marker_containerRef} />
 
                 <div className='board'>
-                    <div className='column_for_marker'>
+                    <div onClick={() => { dispatch_bottom({ action: "chage turn" }) }} className='column_for_marker'>
                         <div id='0' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
                         <div id='1' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
                         <div id='2' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
@@ -130,8 +152,10 @@ export default function Game() {
                     <Board_bottom src_img={img_bottom} />
                 </div>
             </div>
+
             <div className='bottom'>
             </div>
+
         </main >
     )
 }

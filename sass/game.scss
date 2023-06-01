@@ -220,6 +220,10 @@
                 z-index: 4;
             }
 
+            .column_for_marker div {
+                cursor: pointer;
+            }
+
             .board_bottom {
                 height: 120px;
                 width: 140px;
