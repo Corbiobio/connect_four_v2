@@ -13,11 +13,42 @@ import Board_bottom from './component/Board_bottom'
 export default function Game() {
 
     //true = red | false = yellow
-    let turn_color = true
-
+    let [turn_color, setTurn_color] = useState(true)
 
     let marker_containerRef = useRef(null)
     let board_gameRef = useRef(null)
+
+    const [{ turn_for_bottom, img_bottom }, dispatch_Img_bottom] = useReducer(reducer_Img_bottom, { turn: false, img_bottom: "/images/turn-background-red.svg" })
+    const [{ turn_for_marker, img_marker }, dispatch_Img_marker] = useReducer(reducer_Img_marker, { turn: false, img_marker: "/images/marker-red.svg" })
+
+    function reducer_Img_marker({ turn, img_marker }, action) {
+        let red_img_marker = "/images/marker-red.svg";
+        let yellow_img_marker = "/images/marker-yellow.svg";
+
+        switch (turn) {
+            case true:
+                return { turn: !turn, img_marker: red_img_marker }
+            case false:
+                return { turn: !turn, img_marker: yellow_img_marker }
+            default:
+                return { turn: turn, img_marker: red_img_marker }
+        }
+    }
+
+
+    function reducer_Img_bottom({ turn, img_bottom }, action) {
+        let red_img_bottom = "/images/turn-background-red.svg";
+        let yellow_img_bottom = "/images/turn-background-yellow.svg";
+
+        switch (turn) {
+            case true:
+                return { turn: !turn, img_bottom: red_img_bottom }
+            case false:
+                return { turn: !turn, img_bottom: yellow_img_bottom }
+            default:
+                return { turn: turn, img_bottom: red_img_bottom }
+        }
+    }
 
 
     function display_marker(element) {
@@ -39,6 +70,7 @@ export default function Game() {
         if (board_current_column.children[0].classList[0] === "empty") {
 
             let i = board_current_column.children.length - 1
+
             //get index of first coin empty
             while (i >= 0 && board_current_column.children[i].classList[0] !== "empty") {
                 i--
@@ -54,57 +86,10 @@ export default function Game() {
         }
     }
 
-    let [img_bottom, dispatch_bottom] = useReducer(change_bottom_src, "/images/turn-background-red.svg")
-    let [img_marker, dispatch_marker] = useReducer(change_marker_src, "/images/marker-red.svg")
-
-    function change_bottom_src(initiale_value, user_action) {
-        let red_img_bottom = "/images/turn-background-red.svg"
-        let yellow_img_bottom = "/images/turn-background-yellow.svg"
-        if (turn_color) {
-            return red_img_bottom
-        } else {
-            return yellow_img_bottom
-        }
-        turn_color = !turn_color
-    }
-    function change_marker_src(initiale_value, user_action) {
-        let red_img_marker = "/images/marker-red.svg"
-        let yellow_img_marker = "/images/marker-yellow.svg"
-
-
-    }
     function game_turn() {
-        // turn_color = !turn_color
-        console.log(turn_color);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // if (turn_color) {
-        //     setImg_bottom(img_bottom = red_img_bottom)
-        //     setImg_marker(img_marker = red_img_marker)
-        // } else {
-        //     setImg_bottom(img_bottom = yellow_img_bottom)
-        //     setImg_marker(img_marker = yellow_img_marker)
-        // }
-
-        // https://react.dev/reference/react/useState#usestate
-
-        // console.log(img_bottom);
-        // console.log(img_marker);
-        // setImg_bottom()
-        // setImg_marker()
-
+        dispatch_Img_marker(turn_for_marker)
+        dispatch_Img_bottom(turn_for_bottom)
+        setTurn_color(turn_color = !turn_color)
     }
 
     return (
@@ -123,7 +108,7 @@ export default function Game() {
                 <Marker_container src_img={img_marker} ref_use={marker_containerRef} />
 
                 <div className='board'>
-                    <div onClick={() => { dispatch_bottom({ action: "chage turn" }) }} className='column_for_marker'>
+                    <div className='column_for_marker'>
                         <div id='0' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
                         <div id='1' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
                         <div id='2' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
