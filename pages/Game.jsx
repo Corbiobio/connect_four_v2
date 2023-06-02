@@ -17,6 +17,7 @@ export default function Game() {
 
     let marker_containerRef = useRef(null)
     let board_gameRef = useRef(null)
+    let last_coin = useRef({ coin: null, index_column: null, index_coin: null })
 
     const [{ turn_for_bottom, img_bottom }, dispatch_Img_bottom] = useReducer(reducer_Img_bottom, { turn: false, img_bottom: "/images/turn-background-red.svg" })
     const [{ turn_for_marker, img_marker }, dispatch_Img_marker] = useReducer(reducer_Img_marker, { turn: false, img_marker: "/images/marker-red.svg" })
@@ -60,6 +61,7 @@ export default function Game() {
         }
 
         marker_container_child[current_column_position].children[0].style.display = "block"
+
     }
 
     function put_coin(element) {
@@ -82,6 +84,8 @@ export default function Game() {
                 board_current_column.children[i].className = "yellow item"
                 board_current_column.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >"
             }
+
+            last_coin = { coin: board_current_column.children[i], index_column: column_id, index_coin: i }
             game_turn()
         }
     }
@@ -90,8 +94,57 @@ export default function Game() {
         dispatch_Img_marker(turn_for_marker)
         dispatch_Img_bottom(turn_for_bottom)
         setTurn_color(turn_color = !turn_color)
+        verif_turn()
+
     }
 
+
+    function verif_turn() {
+        let columns = board_gameRef.current.children
+
+        const color_coin = last_coin.coin.classList[0]
+        const coin_index_row = last_coin.index_coin
+        const column_id = last_coin.index_column
+
+        console.log(color_coin);
+        console.log(column_id);
+        console.log(coin_index_row);
+
+        //line
+
+        function check_row_coin(color, current_column, coin_row, columns) {
+            function check_coin(color, column_id_to_check, coin_row, columns) {
+                if (columns[column_id_to_check]) {
+                    if (columns[column_id_to_check].children[coin_row].classList[0] === color) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+
+            let coin_good = 1
+
+            let column_check_back = current_column
+            column_check_back--
+
+            while (check_coin(color, column_check_back, coin_row, columns)) {
+                coin_good++
+                column_check_back--
+            }
+
+            let column_check_front = current_column
+            column_check_front++
+
+            while (check_coin(color, column_check_front, coin_row, columns)) {
+                coin_good++
+                column_check_front++
+            }
+            console.log("coin_good : " + coin_good);
+        }
+
+        check_row_coin(color_coin, column_id, coin_index_row, columns)
+    }
     return (
         <main id='Game'>
 
