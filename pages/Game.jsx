@@ -95,9 +95,11 @@ export default function Game() {
         dispatch_Img_bottom(turn_for_bottom)
         setTurn_color(turn_color = !turn_color)
         if (verif_turn()) {
-            //function win
-        }
 
+        }
+        function win(color_win) {
+
+        }
     }
 
 
