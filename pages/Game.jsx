@@ -94,7 +94,9 @@ export default function Game() {
         dispatch_Img_marker(turn_for_marker)
         dispatch_Img_bottom(turn_for_bottom)
         setTurn_color(turn_color = !turn_color)
-        verif_turn()
+        if (verif_turn()) {
+            //function win
+        }
 
     }
 
@@ -195,11 +197,57 @@ export default function Game() {
             }
             return coin_good
         }
+        function check_diagonal_ToprightFromBottomleft_coin(color, current_column, current_row, columns) {
+            function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
+                if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
+                    if (columns[column_id_to_check].children[row_check].classList[0] === color) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
 
-        // console.log("row good : " + check_row_coin(color_coin, column_id, coin_index_row, columns));
-        // console.log("column good : " + check_column_coin(color_coin, column_id, coin_index_row, columns));
-        console.log("diagonal good : " + check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns));
+            let coin_good = 1
 
+            let row_back = current_row
+            let column_check_back = current_column
+            column_check_back++
+            row_back--
+
+            while (check_coin(color, column_check_back, current_row, row_back, columns)) {
+                coin_good++
+                column_check_back++
+                row_back--
+            }
+
+            let row_front = current_row
+            let column_check_front = current_column
+            column_check_front--
+            row_front++
+
+            while (check_coin(color, column_check_front, current_row, row_front, columns)) {
+                coin_good++
+                column_check_front--
+                row_front++
+            }
+            return coin_good
+        }
+        console.log("row good : " + check_row_coin(color_coin, column_id, coin_index_row, columns));
+        console.log("column good : " + check_column_coin(color_coin, column_id, coin_index_row, columns));
+        console.log("diagonal_top_left good : " + check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns));
+        console.log("diagonal_top_right good : " + check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns));
+        if (check_row_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
+            return true
+        } else if (check_column_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
+            return true
+        } else if (check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
+            return true
+        } else if (check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
+            return true
+        } else {
+            return false
+        }
     }
     return (
         <main id='Game'>
