@@ -106,23 +106,7 @@ export default function Game() {
         const coin_index_row = last_coin.index_coin
         const column_id = last_coin.index_column
 
-<<<<<<< HEAD
-        // console.log(color_coin);
-        // console.log(column_id);
-        // console.log(coin_index_row);
-
-        //line
-
         function check_row_coin(color, current_column, coin_row, columns) {
-=======
-        console.log(color_coin);
-        console.log(column_id);
-        console.log(coin_index_row);
-
-        //line
-
-        function check_line_coin(color, current_column, coin_row, columns) {
->>>>>>> 286ccf9ddb7e157e3ad4f133c474c7cb43c1d30a
             function check_coin(color, column_id_to_check, coin_row, columns) {
                 if (columns[column_id_to_check]) {
                     if (columns[column_id_to_check].children[coin_row].classList[0] === color) {
@@ -175,8 +159,47 @@ export default function Game() {
             return coin_good
         }
 
-        console.log("row good : " + check_row_coin(color_coin, column_id, coin_index_row, columns));
-        console.log("column good : " + check_column_coin(color_coin, column_id, coin_index_row, columns));
+        function check_diagonal_TopleftFromBottomright_coin(color, current_column, current_row, columns) {
+            function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
+                if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
+                    if (columns[column_id_to_check].children[row_check].classList[0] === color) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            }
+
+            let coin_good = 1
+
+            let row_back = current_row
+            let column_check_back = current_column
+            column_check_back--
+            row_back--
+
+            while (check_coin(color, column_check_back, current_row, row_back, columns)) {
+                coin_good++
+                column_check_back--
+                row_back--
+            }
+
+            let row_front = current_row
+            let column_check_front = current_column
+            column_check_front++
+            row_front++
+
+            while (check_coin(color, column_check_front, current_row, row_front, columns)) {
+                coin_good++
+                column_check_front++
+                row_front++
+            }
+            return coin_good
+        }
+
+        // console.log("row good : " + check_row_coin(color_coin, column_id, coin_index_row, columns));
+        // console.log("column good : " + check_column_coin(color_coin, column_id, coin_index_row, columns));
+        console.log("diagonal good : " + check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns));
+
     }
     return (
         <main id='Game'>
