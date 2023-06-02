@@ -106,6 +106,7 @@ export default function Game() {
         const coin_index_row = last_coin.index_coin
         const column_id = last_coin.index_column
 
+<<<<<<< HEAD
         // console.log(color_coin);
         // console.log(column_id);
         // console.log(coin_index_row);
@@ -113,6 +114,15 @@ export default function Game() {
         //line
 
         function check_row_coin(color, current_column, coin_row, columns) {
+=======
+        console.log(color_coin);
+        console.log(column_id);
+        console.log(coin_index_row);
+
+        //line
+
+        function check_line_coin(color, current_column, coin_row, columns) {
+>>>>>>> 286ccf9ddb7e157e3ad4f133c474c7cb43c1d30a
             function check_coin(color, column_id_to_check, coin_row, columns) {
                 if (columns[column_id_to_check]) {
                     if (columns[column_id_to_check].children[coin_row].classList[0] === color) {
