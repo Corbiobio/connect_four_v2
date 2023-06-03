@@ -18,6 +18,8 @@ export default function Game() {
     let marker_containerRef = useRef(null)
     let board_gameRef = useRef(null)
     let last_coin = useRef({ coin: null, index_column: null, index_coin: null })
+    let board_bottomRef = useRef(null)
+    let bottom_page = useRef(null)
 
     const [{ turn_for_bottom, img_bottom }, dispatch_Img_bottom] = useReducer(reducer_Img_bottom, { turn: false, img_bottom: "/images/turn-background-red.svg" })
     const [{ turn_for_marker, img_marker }, dispatch_Img_marker] = useReducer(reducer_Img_marker, { turn: false, img_marker: "/images/marker-red.svg" })
@@ -94,10 +96,22 @@ export default function Game() {
         dispatch_Img_marker(turn_for_marker)
         dispatch_Img_bottom(turn_for_bottom)
         setTurn_color(turn_color = !turn_color)
-        if (verif_turn()) {
 
-        }
-        function win(color_win) {
+        let turn_result = verif_turn()
+        if (turn_result.win) {
+            function win(color_win) {
+                let board_bottom_child = board_bottomRef.current.children
+                board_bottom_child[0].style.display = "none"
+                board_bottom_child[1].style.display = "flex"
+
+                if (color_win === "red") {
+                    bottom_page.current.style.backgroundColor = "#FD6687"
+                } else {
+                    bottom_page.current.style.backgroundColor = "#FFCE67"
+                }
+
+            }
+            win(turn_result.color_win)
 
         }
     }
@@ -112,8 +126,10 @@ export default function Game() {
 
         function check_row_coin(color, current_column, coin_row, columns) {
             function check_coin(color, column_id_to_check, coin_row, columns) {
+
                 if (columns[column_id_to_check]) {
                     if (columns[column_id_to_check].children[coin_row].classList[0] === color) {
+                        coin_verified.push(columns[column_id_to_check].children[coin_row])
                         return true
                     } else {
                         return false
@@ -122,6 +138,7 @@ export default function Game() {
             }
 
             let coin_good = 1
+            let coin_verified = [last_coin.coin]
 
             let column_check_back = current_column
             column_check_back--
@@ -138,13 +155,14 @@ export default function Game() {
                 coin_good++
                 column_check_front++
             }
-            return coin_good
+            return { coin_good: coin_good, coin_wined: coin_verified }
         }
 
         function check_column_coin(color_coin, column_id, coin_index_row, columns) {
             function check_coin(color, row_to_check, column) {
                 if (column.children[row_to_check]) {
                     if (column.children[row_to_check].classList[0] === color) {
+                        coin_verified.push(column.children[row_to_check])
                         return true
                     } else {
                         return false
@@ -153,6 +171,7 @@ export default function Game() {
             }
 
             let coin_good = 1
+            let coin_verified = [last_coin.coin]
 
             let row_down = coin_index_row
             row_down++
@@ -160,13 +179,14 @@ export default function Game() {
                 coin_good++
                 row_down++
             }
-            return coin_good
+            return { coin_good: coin_good, coin_wined: coin_verified }
         }
 
         function check_diagonal_TopleftFromBottomright_coin(color, current_column, current_row, columns) {
             function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
                 if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
                     if (columns[column_id_to_check].children[row_check].classList[0] === color) {
+                        coin_verified.push(columns[column_id_to_check].children[row_check])
                         return true
                     } else {
                         return false
@@ -175,6 +195,7 @@ export default function Game() {
             }
 
             let coin_good = 1
+            let coin_verified = [last_coin.coin]
 
             let row_back = current_row
             let column_check_back = current_column
@@ -197,12 +218,13 @@ export default function Game() {
                 column_check_front++
                 row_front++
             }
-            return coin_good
+            return { coin_good: coin_good, coin_wined: coin_verified }
         }
         function check_diagonal_ToprightFromBottomleft_coin(color, current_column, current_row, columns) {
             function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
                 if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
                     if (columns[column_id_to_check].children[row_check].classList[0] === color) {
+                        coin_verified.push(columns[column_id_to_check].children[row_check])
                         return true
                     } else {
                         return false
@@ -211,6 +233,8 @@ export default function Game() {
             }
 
             let coin_good = 1
+            let coin_verified = [last_coin.coin]
+
 
             let row_back = current_row
             let column_check_back = current_column
@@ -233,22 +257,29 @@ export default function Game() {
                 column_check_front--
                 row_front++
             }
-            return coin_good
+            return { coin_good: coin_good, coin_wined: coin_verified }
         }
-        console.log("row good : " + check_row_coin(color_coin, column_id, coin_index_row, columns));
-        console.log("column good : " + check_column_coin(color_coin, column_id, coin_index_row, columns));
-        console.log("diagonal_top_left good : " + check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns));
-        console.log("diagonal_top_right good : " + check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns));
-        if (check_row_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
-            return true
-        } else if (check_column_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
-            return true
-        } else if (check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
-            return true
-        } else if (check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns) >= 4) {
-            return true
+
+        let row_verif = check_row_coin(color_coin, column_id, coin_index_row, columns)
+        let column_verif = check_column_coin(color_coin, column_id, coin_index_row, columns)
+        let diagonal_TopleftFromBottomright_verif = check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns)
+        let diagonal_ToprightFromBottomleft_verif = check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns)
+
+        console.log("row good : " + row_verif.coin_good);
+        console.log("column good : " + column_verif.coin_good);
+        console.log("diagonal_top_left good : " + diagonal_TopleftFromBottomright_verif.coin_good);
+        console.log("diagonal_top_right good : " + diagonal_ToprightFromBottomleft_verif.coin_good);
+
+        if (row_verif.coin_good >= 4) {
+            return { win: true, color_win: color_coin, coins_win: row_verif.coin_wined }
+        } else if (column_verif.coin_good >= 4) {
+            return { win: true, color_win: color_coin, coins_win: column_verif.coin_wined }
+        } else if (diagonal_TopleftFromBottomright_verif.coin_good >= 4) {
+            return { win: true, color_win: color_coin, coins_win: diagonal_TopleftFromBottomright_verif.coin_wined }
+        } else if (diagonal_ToprightFromBottomleft_verif.coin_good >= 4) {
+            return { win: true, color_win: color_coin, coins_win: diagonal_ToprightFromBottomleft_verif.coin_wined }
         } else {
-            return false
+            return { win: false, color_win: null, coins_win: null }
         }
     }
     return (
@@ -293,11 +324,11 @@ export default function Game() {
 
                     <Board_black />
 
-                    <Board_bottom src_img={img_bottom} />
+                    <Board_bottom src_img={img_bottom} ref_use={board_bottomRef} />
                 </div>
             </div>
 
-            <div className='bottom'>
+            <div className='bottom' ref={bottom_page}>
             </div>
 
         </main >

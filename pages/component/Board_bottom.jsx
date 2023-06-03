@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Board_bottom({ src_img }) {
+export default function Board_bottom({ src_img, ref_use }) {
     return (
-        <div className='board_bottom'>
+        <div className='board_bottom' ref={ref_use}>
             <div className='bottom_turn'>
                 <img src={src_img} alt="triangle with score" />
                 <div>
