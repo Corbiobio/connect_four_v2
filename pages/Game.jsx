@@ -15,8 +15,10 @@ export default function Game() {
     //true = red | false = yellow
     let [turn_color, setTurn_color] = useState(true)
 
+    let can_play = useRef(true)
     let marker_containerRef = useRef(null)
     let board_gameRef = useRef(null)
+    let boardRef = useRef(null)
     let last_coin = useRef({ coin: null, index_column: null, index_coin: null })
     let board_bottomRef = useRef(null)
     let bottom_page = useRef(null)
@@ -95,29 +97,44 @@ export default function Game() {
     function game_turn() {
         dispatch_Img_marker(turn_for_marker)
         dispatch_Img_bottom(turn_for_bottom)
-        setTurn_color(turn_color = !turn_color)
 
-        let turn_result = verif_turn()
+        let turn_result = verif_win()
         if (turn_result.win) {
             function win(color_win) {
+                //display win bottom
                 let board_bottom_child = board_bottomRef.current.children
                 board_bottom_child[0].style.display = "none"
                 board_bottom_child[1].style.display = "flex"
 
+                //change bottom color
                 if (color_win === "red") {
                     bottom_page.current.style.backgroundColor = "#FD6687"
                 } else {
                     bottom_page.current.style.backgroundColor = "#FFCE67"
                 }
+                //remove action on board 
+                can_play.current = false
 
+                //remove marker
+                let marker_child = marker_containerRef.current.children
+                for (let i = 0; i < marker_child.length; i++) {
+                    marker_child[i].style.display = "none"
+                }
+
+                //cursor default
+                let board_child = boardRef.current.children
+                for (let i = 0; i < board_child.length; i++) {
+                    board_child[i].style.cursor = "default"
+                }
             }
             win(turn_result.color_win)
-
+        } else {
+            setTurn_color(turn_color = !turn_color)
         }
     }
 
 
-    function verif_turn() {
+    function verif_win() {
         let columns = board_gameRef.current.children
 
         const color_coin = last_coin.coin.classList[0]
@@ -298,14 +315,14 @@ export default function Game() {
                 <Marker_container src_img={img_marker} ref_use={marker_containerRef} />
 
                 <div className='board'>
-                    <div className='column_for_marker'>
-                        <div id='0' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
-                        <div id='1' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
-                        <div id='2' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
-                        <div id='3' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
-                        <div id='4' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
-                        <div id='5' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
-                        <div id='6' onClick={event => { put_coin(event.target) }} onMouseOver={event => { display_marker(event.target) }}></div>
+                    <div className='column_for_marker' ref={boardRef}>
+                        <div id='0' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
+                        <div id='1' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
+                        <div id='2' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
+                        <div id='3' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
+                        <div id='4' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
+                        <div id='5' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
+                        <div id='6' onClick={event => { if (can_play.current) { put_coin(event.target) } }} onMouseOver={event => { if (can_play.current) { display_marker(event.target) } }}></div>
                     </div>
 
                     <Board_white />
@@ -324,7 +341,7 @@ export default function Game() {
 
                     <Board_black />
 
-                    <Board_bottom src_img={img_bottom} ref_use={board_bottomRef} />
+                    <Board_bottom turn={turn_color} src_img={img_bottom} ref_use={board_bottomRef} />
                 </div>
             </div>
 
