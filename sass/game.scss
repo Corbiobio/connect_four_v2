@@ -193,9 +193,27 @@
                         z-index: 2;
                         width: 41px;
                         height: 46px;
+                        position: relative;
 
                         picture {
-                            display: none
+                            display: none;
+                            position: absolute;
+                        }
+
+                        .circle {
+                            width: 25px;
+                            height: 25px;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -55%);
+                            z-index: 6;
+                            filter: brightness(0) saturate(100%) invert(98%) sepia(4%) saturate(395%) hue-rotate(240deg) brightness(117%) contrast(100%);
+                            animation-name: breath;
+                            animation-duration: 1s;
+                            animation-direction: alternate;
+                            animation-timing-function: linear;
+                            animation-iteration-count: infinite;
                         }
                     }
 
@@ -366,6 +384,12 @@
                         .item {
                             height: 75px;
                             width: 70px;
+
+                            .circle {
+                                height: 50px;
+                                width: 50px;
+                                animation-name: breath_tablet_desktop;
+                            }
                         }
                     }
                 }
@@ -396,7 +420,6 @@
         }
 
         .bottom {
-            height: calc(100px - calc(115px + 722px));
             transform: none;
         }
     }
@@ -413,7 +436,6 @@
             grid-template-columns: repeat(3, 1fr);
             margin-bottom: -40px;
 
-            // grid-template-rows: repeat(3, 1fr);
             .player {
                 width: 140px;
                 height: 160px;
@@ -449,5 +471,29 @@
                 grid-area: 2 / 2 / 3 / 3;
             }
         }
+    }
+}
+
+@keyframes breath {
+    from {
+        width: 20px;
+        height: 20px;
+    }
+
+    to {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@keyframes breath_tablet_desktop {
+    from {
+        width: 40px;
+        height: 40px;
+    }
+
+    to {
+        width: 50px;
+        height: 50px;
     }
 }

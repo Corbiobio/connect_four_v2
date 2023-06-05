@@ -100,7 +100,7 @@ export default function Game() {
 
         let turn_result = verif_win()
         if (turn_result.win) {
-            function win(color_win) {
+            function win(color_win, coin_win) {
                 //display win bottom
                 let board_bottom_child = board_bottomRef.current.children
                 board_bottom_child[0].style.display = "none"
@@ -126,8 +126,13 @@ export default function Game() {
                 for (let i = 0; i < board_child.length; i++) {
                     board_child[i].style.cursor = "default"
                 }
+
+                //put circle on correct coin
+                for (let i = 0; i < coin_win.length; i++) {
+                    coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
+                }
             }
-            win(turn_result.color_win)
+            win(turn_result.color_win, turn_result.coins_win)
         } else {
             setTurn_color(turn_color = !turn_color)
         }
