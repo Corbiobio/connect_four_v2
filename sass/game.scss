@@ -204,9 +204,9 @@
                             width: 25px;
                             height: 25px;
                             position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -55%);
+                            scale: 1.1;
+                            top: 20%;
+                            left: 20%;
                             z-index: 6;
                             filter: brightness(0) saturate(100%) invert(98%) sepia(4%) saturate(395%) hue-rotate(240deg) brightness(117%) contrast(100%);
                             animation-name: breath;
@@ -307,7 +307,8 @@
                         font-size: 56px;
                     }
 
-                    button {
+                    a {
+                        text-decoration: none;
                         background-color: $dark_purple;
                         border: none;
                         border-radius: 20px;
@@ -389,6 +390,8 @@
                                 height: 50px;
                                 width: 50px;
                                 animation-name: breath_tablet_desktop;
+                                top: 15%;
+                                left: 15%;
                             }
                         }
                     }
@@ -476,24 +479,20 @@
 
 @keyframes breath {
     from {
-        width: 20px;
-        height: 20px;
+        scale: 1;
     }
 
     to {
-        width: 25px;
-        height: 25px;
+        scale: 0.4;
     }
 }
 
 @keyframes breath_tablet_desktop {
     from {
-        width: 40px;
-        height: 40px;
+        scale: 1;
     }
-
+    
     to {
-        width: 50px;
-        height: 50px;
+        scale: 0.4;
     }
 }

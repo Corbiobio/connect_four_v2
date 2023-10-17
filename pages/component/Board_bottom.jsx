@@ -22,7 +22,7 @@ export default function Board_bottom({ turn, src_img, ref_use }) {
             <div className='bottom_win'>
                 <p>player {turn_player.current}</p>
                 <strong>wins</strong>
-                <button>play again</button>
+                <a href='/game'>play again</a>
             </div>
         </div>
     )
