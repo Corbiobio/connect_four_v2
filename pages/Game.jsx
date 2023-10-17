@@ -131,6 +131,14 @@ export default function Game() {
                 for (let i = 0; i < coin_win.length; i++) {
                     coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
                 }
+
+                //update nbr of win 
+                if (color_win === "red") {
+                    localStorage.setItem("player_one",parseInt(localStorage.getItem("player_one"))+1)
+                } else {
+                    localStorage.setItem("player_two",parseInt(localStorage.getItem("player_two"))+1)
+                }
+
             }
             win(turn_result.color_win, turn_result.coins_win)
         } else {
