@@ -58,5 +58,8 @@
             width: 100%;
             border-radius: 50px;
         }
+        img:hover{
+            content: url(/images/icon-check_active.svg);
+        }
     }
 }

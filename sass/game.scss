@@ -49,6 +49,10 @@
                 font-size: 24px;
                 cursor: pointer;
             }
+            .btn_menu:hover {
+                border-color: $dark_purple;
+                box-shadow: 0px 10px 0px 0px $dark_purple;
+            }
 
             .btn_menu_pink {
                 background-color: $pink;
@@ -65,15 +69,7 @@
         padding: 30px 0;
 
         .btn_nav {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 20px;
-            background-color: $dark_purple;
-            padding: 10px 20px;
-            width: 100px;
-            cursor: pointer;
+            @include small_btn
         }
 
         img {
@@ -91,6 +87,7 @@
         justify-items: center;
 
         .player {
+            cursor: default;
             @include border;
             background-color: white;
             display: flex;
@@ -255,6 +252,7 @@
                 transform: translate(-50%, -25%);
                 width: fit-content;
                 height: fit-content;
+                cursor: default;
 
                 .bottom_turn {
                     height: 120px;
@@ -313,13 +311,7 @@
                     }
 
                     a {
-                        text-decoration: none;
-                        background-color: $dark_purple;
-                        border: none;
-                        border-radius: 20px;
-                        padding: 10px 20px;
-                        color: white;
-                        width: fit-content;
+                        @include small_btn
                     }
                 }
             }
