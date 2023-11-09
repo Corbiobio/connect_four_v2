@@ -95,8 +95,11 @@ export default function Game() {
     }
 
     function game_turn() {
+        //change color of marker and bottom div for turn
         dispatch_Img_marker(turn_for_marker)
         dispatch_Img_bottom(turn_for_bottom)
+
+
 
         let turn_result = verif_win()
         if (turn_result.win) {
@@ -142,6 +145,22 @@ export default function Game() {
             }
             win(turn_result.color_win, turn_result.coins_win)
         } else {
+            //change hover on small btn
+            if (turn_color) {
+                let btn = document.getElementsByClassName("btn_hover_red")
+                btn = [...btn]
+                btn.map((btn)=>{
+                    btn.classList.replace("btn_hover_red","btn_hover_yellow")
+                    console.log(btn);
+                })
+            }else{
+                let btn = document.getElementsByClassName("btn_hover_yellow")
+                btn = [...btn]
+                btn.map((btn)=>{
+                    btn.classList.replace("btn_hover_yellow","btn_hover_red")
+                console.log(btn);
+            })
+            }
             setTurn_color(turn_color = !turn_color)
         }
     }

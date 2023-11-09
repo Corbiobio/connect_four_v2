@@ -36,7 +36,6 @@
                 text-align: center;
             }
 
-
             .btn_menu {
                 display: block;
                 @include border;
@@ -51,7 +50,8 @@
             }
             .btn_menu:hover {
                 border-color: $dark_purple;
-                box-shadow: 0px 10px 0px 0px $dark_purple;
+                transform: translateY(5px);
+                box-shadow: 0px 5px 0px 0px $dark_purple;
             }
 
             .btn_menu_pink {
@@ -386,7 +386,7 @@
                             .circle {
                                 height: 50px;
                                 width: 50px;
-                                animation-name: breath_tablet_desktop;
+                                animation-name: breath;
                                 top: 15%;
                                 left: 15%;
                             }
@@ -474,21 +474,18 @@
     }
 }
 
+.btn_hover_red:hover{
+    background-color: $pink !important;
+}
+.btn_hover_yellow:hover{
+    background-color: $yellow !important;
+}
+
 @keyframes breath {
     from {
         scale: 1;
     }
 
-    to {
-        scale: 0.4;
-    }
-}
-
-@keyframes breath_tablet_desktop {
-    from {
-        scale: 1;
-    }
-    
     to {
         scale: 0.4;
     }

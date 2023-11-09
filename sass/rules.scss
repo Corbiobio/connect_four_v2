@@ -7,6 +7,7 @@
     justify-content: center;
 
     section {
+        cursor: default;
         @include border;
         border-radius: 40px;
         background-color: white;

@@ -8,8 +8,8 @@ export default function Nav_bar() {
 
     return (
         <nav>
-            <button className='btn_nav' id='menu_btn' onClick={menuClick} >menu</button>
+            <button className='btn_nav btn_hover_red' id='menu_btn' onClick={menuClick} >menu</button>
             <img src="/images/logo.svg" alt="logo" />
-            <a href="/game" className='btn_nav'>restart</a>
+            <a href="/game" className='btn_nav  btn_hover_red'>restart</a>
         </nav>)
 }
