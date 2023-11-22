@@ -40,7 +40,6 @@ export default function Game() {
         }
     }
 
-
     function reducer_Img_bottom({ turn, img_bottom }, action) {
         let red_img_bottom = "/images/turn-background-red.svg";
         let yellow_img_bottom = "/images/turn-background-yellow.svg";
@@ -83,10 +82,10 @@ export default function Game() {
             }
             if (turn_color) {
                 board_current_column.children[i].className = "red item"
-                board_current_column.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-red-large.svg\' /><img src=\"/images/counter-red-small.svg\" alt=\"coin\" /></picture >"
+                board_current_column.children[i].innerHTML = `<picture class=anim_coin_fall_${i}><source media= \"(min-width:750px)\" srcSet = \'/images/counter-red-large.svg\' /><img src=\"/images/counter-red-small.svg\" alt=\"coin\" /></picture >`
             } else {
                 board_current_column.children[i].className = "yellow item"
-                board_current_column.children[i].innerHTML = "<picture><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >"
+                board_current_column.children[i].innerHTML = `<picture class=anim_coin_fall_${i}><source media= \"(min-width:750px)\" srcSet = \'/images/counter-yellow-large.svg\' /><img src=\"/images/counter-yellow-small.svg\" alt=\"coin\" /></picture >`
             }
 
             last_coin = { coin: board_current_column.children[i], index_column: column_id, index_coin: i }
@@ -115,6 +114,7 @@ export default function Game() {
                 } else {
                     bottom_page.current.style.backgroundColor = "#FFCE67"
                 }
+
                 //remove action on board 
                 can_play.current = false
 
@@ -132,7 +132,8 @@ export default function Game() {
 
                 //put circle on correct coin
                 for (let i = 0; i < coin_win.length; i++) {
-                    coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
+                    // coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
+                    coin_win[i].innerHTML += "<div><div>"
                 }
 
                 //update nbr of win 
@@ -151,14 +152,12 @@ export default function Game() {
                 btn = [...btn]
                 btn.map((btn)=>{
                     btn.classList.replace("btn_hover_red","btn_hover_yellow")
-                    console.log(btn);
                 })
             }else{
                 let btn = document.getElementsByClassName("btn_hover_yellow")
                 btn = [...btn]
                 btn.map((btn)=>{
                     btn.classList.replace("btn_hover_yellow","btn_hover_red")
-                console.log(btn);
             })
             }
             setTurn_color(turn_color = !turn_color)

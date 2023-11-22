@@ -200,6 +200,33 @@
                         picture {
                             display: none;
                             position: absolute;
+                            //default value for animation
+                            animation-duration: 1.1s;
+                            animation-fill-mode: forwards;
+                            animation-iteration-count: 1;
+                        }
+                        .anim_coin_fall_5{
+                            animation-name: coin_5;
+                        }
+                        .anim_coin_fall_4{
+                            animation-name: coin_4;
+                            animation-duration: 1s;
+                        }
+                        .anim_coin_fall_3{
+                            animation-name: coin_3;
+                            animation-duration: 1s;
+                        }
+                        .anim_coin_fall_2{
+                            animation-name: coin_2;
+                            animation-duration: 0.9s;
+                        }
+                        .anim_coin_fall_1{
+                            animation-name: coin_1;
+                            animation-duration: 0.8s;
+                        }
+                        .anim_coin_fall_0{
+                            animation-name: coin_0;
+                            animation-duration: 0.8s;
                         }
 
                         .circle {
@@ -230,9 +257,7 @@
                             display: block
                         }
                     }
-
                 }
-
             }
 
             .column_for_marker {
@@ -516,5 +541,158 @@
 
     to{
         opacity: 0;
+    }
+}
+
+@keyframes coin_5 {
+    from {
+        transform: translateY(-680%);
+        animation-timing-function:cubic-bezier(1,.325,.35,.9);
+        //some test
+        // animation-timing-function:cubic-bezier(1,0,.34,1) ;
+        // animation-timing-function:cubic-bezier(1,.35,.45,.9) ;
+        // animation-timing-function:cubic-bezier(.75,.2,.3,1) ;
+    }
+    50%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0,.9,.3,.8) ;
+        //some test
+        // animation-timing-function: cubic-bezier(.20,.65,.3,.8) ;
+    }
+    68%{
+        transform: translateY(-290%) ;
+        animation-timing-function:cubic-bezier(.8,0,.3,1) ;
+    }
+    82%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(.25,.65,.3,.8) ;
+    }
+    90%{
+        transform: translateY(-90%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+@keyframes coin_4 {
+    from {
+        transform: translateY(-570%);
+        animation-timing-function:cubic-bezier(1,.325,.35,.9);
+    }
+    50%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0,.9,.3,.8) ;
+    }
+    68%{
+        transform: translateY(-190%) ;
+        animation-timing-function:cubic-bezier(.8,0,.3,1) ;
+    }
+    82%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(.25,.65,.3,.8) ;
+    }
+    90%{
+        transform: translateY(-80%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+
+@keyframes coin_3 {
+    from {
+        transform: translateY(-460%);
+        animation-timing-function:cubic-bezier(1,.325,.35,.9);
+    }
+    50%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0,.9,.3,.8) ;
+    }
+    68%{
+        transform: translateY(-170%) ;
+        animation-timing-function:cubic-bezier(.8,0,.3,1) ;
+    }
+    82%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(.25,.65,.3,.8) ;
+    }
+    90%{
+        transform: translateY(-70%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+
+@keyframes coin_2 {
+    from {
+        transform: translateY(-350%);
+        animation-timing-function:cubic-bezier(1,.325,.35,.9);
+    }
+    50%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0,.9,.3,.8) ;
+    }
+    68%{
+        transform: translateY(-80%) ;
+        animation-timing-function:cubic-bezier(.8,0,.3,1) ;
+    }
+    82%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(.25,.65,.3,.8) ;
+    }
+    90%{
+        transform: translateY(-50%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+@keyframes coin_1 {
+    from {
+        transform: translateY(-240%);
+        animation-timing-function:cubic-bezier(1,.325,.35,.9);
+    }
+    50%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0,.9,.3,.8) ;
+    }
+    68%{
+        transform: translateY(-60%) ;
+        animation-timing-function:cubic-bezier(.8,0,.3,1) ;
+    }
+    82%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(.25,.65,.3,.8) ;
+    }
+    90%{
+        transform: translateY(-30%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+@keyframes coin_0 {
+    from {
+        transform: translateY(-130%);
+        animation-timing-function:cubic-bezier(1,.325,.35,.9);
+    }
+    50%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0,.9,.3,.8) ;
+    }
+    68%{
+        transform: translateY(-40%) ;
+        animation-timing-function:cubic-bezier(.8,0,.3,1) ;
+    }
+    82%{
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(.25,.65,.3,.8) ;
+    }
+    90%{
+        transform: translateY(-20%);
+    }
+    to{
+        transform: translateY(0);
     }
 }
