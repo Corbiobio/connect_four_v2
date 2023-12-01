@@ -94,242 +94,304 @@ export default function Game() {
     }
 
     function game_turn() {
-        //change color of marker and bottom div for turn
-        dispatch_Img_marker(turn_for_marker)
-        dispatch_Img_bottom(turn_for_bottom)
 
+        function verif_draw(columns) {
+            let line_full = true
+            for (let i = 0; i < columns.length; i++) {
+                //get first class value of first line of each column | value : red yellow or empty
+                if(columns[i].children[0].classList[0] === "empty"){
+                    line_full = false;
+                    break 
+                }
+            }
+            return line_full
+        }
+    
+        function verif_win(columns) {
+    
+            const color_coin = last_coin.coin.classList[0]
+            const coin_index_row = last_coin.index_coin
+            const column_id = last_coin.index_column
+    
+            function check_row_coin(color, current_column, coin_row, columns) {
+                function check_coin(color, column_id_to_check, coin_row, columns) {
+    
+                    if (columns[column_id_to_check]) {
+                        if (columns[column_id_to_check].children[coin_row].classList[0] === color) {
+                            coin_verified.push(columns[column_id_to_check].children[coin_row])
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                }
+    
+                let coin_good = 1
+                let coin_verified = [last_coin.coin]
+    
+                let column_check_back = current_column
+                column_check_back--
+    
+                while (check_coin(color, column_check_back, coin_row, columns)) {
+                    coin_good++
+                    column_check_back--
+                }
+    
+                let column_check_front = current_column
+                column_check_front++
+    
+                while (check_coin(color, column_check_front, coin_row, columns)) {
+                    coin_good++
+                    column_check_front++
+                }
+                return { coin_good: coin_good, coin_wined: coin_verified }
+            }
+    
+            function check_column_coin(color_coin, column_id, coin_index_row, columns) {
+                function check_coin(color, row_to_check, column) {
+                    if (column.children[row_to_check]) {
+                        if (column.children[row_to_check].classList[0] === color) {
+                            coin_verified.push(column.children[row_to_check])
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                }
+    
+                let coin_good = 1
+                let coin_verified = [last_coin.coin]
+    
+                let row_down = coin_index_row
+                row_down++
+                while (check_coin(color_coin, row_down, columns[column_id])) {
+                    coin_good++
+                    row_down++
+                }
+                return { coin_good: coin_good, coin_wined: coin_verified }
+            }
+    
+            function check_diagonal_TopleftFromBottomright_coin(color, current_column, current_row, columns) {
+                function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
+                    if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
+                        if (columns[column_id_to_check].children[row_check].classList[0] === color) {
+                            coin_verified.push(columns[column_id_to_check].children[row_check])
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                }
+    
+                let coin_good = 1
+                let coin_verified = [last_coin.coin]
+    
+                let row_back = current_row
+                let column_check_back = current_column
+                column_check_back--
+                row_back--
+    
+                while (check_coin(color, column_check_back, current_row, row_back, columns)) {
+                    coin_good++
+                    column_check_back--
+                    row_back--
+                }
+    
+                let row_front = current_row
+                let column_check_front = current_column
+                column_check_front++
+                row_front++
+    
+                while (check_coin(color, column_check_front, current_row, row_front, columns)) {
+                    coin_good++
+                    column_check_front++
+                    row_front++
+                }
+                return { coin_good: coin_good, coin_wined: coin_verified }
+            }
+            function check_diagonal_ToprightFromBottomleft_coin(color, current_column, current_row, columns) {
+                function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
+                    if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
+                        if (columns[column_id_to_check].children[row_check].classList[0] === color) {
+                            coin_verified.push(columns[column_id_to_check].children[row_check])
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                }
+    
+                let coin_good = 1
+                let coin_verified = [last_coin.coin]
+    
+    
+                let row_back = current_row
+                let column_check_back = current_column
+                column_check_back++
+                row_back--
+    
+                while (check_coin(color, column_check_back, current_row, row_back, columns)) {
+                    coin_good++
+                    column_check_back++
+                    row_back--
+                }
+    
+                let row_front = current_row
+                let column_check_front = current_column
+                column_check_front--
+                row_front++
+    
+                while (check_coin(color, column_check_front, current_row, row_front, columns)) {
+                    coin_good++
+                    column_check_front--
+                    row_front++
+                }
+                return { coin_good: coin_good, coin_wined: coin_verified }
+            }
+    
+            let row_verif = check_row_coin(color_coin, column_id, coin_index_row, columns)
+            let column_verif = check_column_coin(color_coin, column_id, coin_index_row, columns)
+            let diagonal_TopleftFromBottomright_verif = check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns)
+            let diagonal_ToprightFromBottomleft_verif = check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns)
+    
+            console.log("row good : " + row_verif.coin_good);
+            console.log("column good : " + column_verif.coin_good);
+            console.log("diagonal_top_left good : " + diagonal_TopleftFromBottomright_verif.coin_good);
+            console.log("diagonal_top_right good : " + diagonal_ToprightFromBottomleft_verif.coin_good);
+    
+            if (row_verif.coin_good >= 4) {
+                return { win: true, color_win: color_coin, coins_win: row_verif.coin_wined }
+            } else if (column_verif.coin_good >= 4) {
+                return { win: true, color_win: color_coin, coins_win: column_verif.coin_wined }
+            } else if (diagonal_TopleftFromBottomright_verif.coin_good >= 4) {
+                return { win: true, color_win: color_coin, coins_win: diagonal_TopleftFromBottomright_verif.coin_wined }
+            } else if (diagonal_ToprightFromBottomleft_verif.coin_good >= 4) {
+                return { win: true, color_win: color_coin, coins_win: diagonal_ToprightFromBottomleft_verif.coin_wined }
+            } else {
+                return { win: false, color_win: null, coins_win: null }
+            }
+        }
 
+        //stop action on board
+        function stop_game(){
+            //remove action on board 
+            can_play.current = false
 
-        let turn_result = verif_win()
-        if (turn_result.win) {
+            //remove marker
+            let marker_child = marker_containerRef.current.children
+            for (let i = 0; i < marker_child.length; i++) {
+                marker_child[i].style.display = "none"
+            }
+
+            //cursor default on each column
+            let board_child = boardRef.current.children
+            for (let i = 0; i < board_child.length; i++) {
+                board_child[i].style.cursor = "default"
+            }
+
+        }
+
+        //change class for btn
+        function change_class_small_btn(color_status) {
+            let main_color 
+            let other_color
+            //true = red | false = yellow
+            if (color_status) {
+                main_color = "red"
+                other_color = "yellow"
+            }else{
+                main_color = "yellow"
+                other_color = "red"
+            }
+            let btn = document.getElementsByClassName("btn_hover_" + main_color)
+            //replace html collection by arr
+            btn = [...btn]
+            //replace class by other one
+            btn.map((btn)=>{
+                btn.classList.replace("btn_hover_" + main_color,"btn_hover_" + other_color)
+            })
+        }
+
+        //get all columns
+        let columns = board_gameRef.current.children
+
+        //verif win or draw
+        let verify_draw = verif_draw(columns)
+        let verify_win = verif_win(columns)
+
+        if (verify_win.win) {
             function win(color_win, coin_win) {
+                stop_game()
+
                 //display win bottom
                 let board_bottom_child = board_bottomRef.current.children
                 board_bottom_child[0].style.display = "none"
                 board_bottom_child[1].style.display = "flex"
 
                 //change bottom color
-                if (color_win === "red") {
-                    bottom_page.current.style.backgroundColor = "#FD6687"
-                } else {
-                    bottom_page.current.style.backgroundColor = "#FFCE67"
-                }
-
-                //remove action on board 
-                can_play.current = false
-
-                //remove marker
-                let marker_child = marker_containerRef.current.children
-                for (let i = 0; i < marker_child.length; i++) {
-                    marker_child[i].style.display = "none"
-                }
-
-                //cursor default
-                let board_child = boardRef.current.children
-                for (let i = 0; i < board_child.length; i++) {
-                    board_child[i].style.cursor = "default"
-                }
-
-                //put circle on correct coin
-                for (let i = 0; i < coin_win.length; i++) {
-                    // coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
-                    coin_win[i].innerHTML += "<div><div>"
-                }
-
                 //update nbr of win 
                 if (color_win === "red") {
+                    bottom_page.current.style.backgroundColor = "#FD6687"
                     localStorage.setItem("player_one",parseInt(localStorage.getItem("player_one"))+1)
                 } else {
+                    bottom_page.current.style.backgroundColor = "#FFCE67"
                     localStorage.setItem("player_two",parseInt(localStorage.getItem("player_two"))+1)
                 }
 
+                for (let i = 0; i < coin_win.length; i++) {
+                    //put circle on correct coin
+                    coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
+                    //remove class because animation play a new time when win
+                    coin_win[i].firstElementChild.className = ""
+                }
+
             }
-            win(turn_result.color_win, turn_result.coins_win)
-        } else {
-            //change hover on small btn
-            if (turn_color) {
-                let btn = document.getElementsByClassName("btn_hover_red")
+
+            win(verify_win.color_win, verify_win.coins_win)
+        }else if (verify_draw){
+            function draw(){
+
+                stop_game()
+
+                //display draw bottom
+                let board_bottom_child = board_bottomRef.current.children
+                board_bottom_child[0].style.display = "none"
+                board_bottom_child[2].style.display = "flex"
+
+                
+                // remove hover color on small btn
+                
+                let color
+                //turn color -> true = red | false = yellow
+                if (turn_color) {
+                    color = "red"
+                }else{
+                    color = "yellow"
+                }
+
+                let btn = document.getElementsByClassName("btn_hover_" + color)
+                //replace html collection by arr
                 btn = [...btn]
+                //remove class
                 btn.map((btn)=>{
-                    btn.classList.replace("btn_hover_red","btn_hover_yellow")
+                    btn.classList.remove("btn_hover_" + color)
                 })
-            }else{
-                let btn = document.getElementsByClassName("btn_hover_yellow")
-                btn = [...btn]
-                btn.map((btn)=>{
-                    btn.classList.replace("btn_hover_yellow","btn_hover_red")
-            })
             }
+
+            draw()
+
+        } else {
+            //change color of marker and bottom div for each turn
+            dispatch_Img_marker(turn_for_marker)
+            dispatch_Img_bottom(turn_for_bottom)
+
+            //change hover color on small btn
+            change_class_small_btn(turn_color)
+            
             setTurn_color(turn_color = !turn_color)
         }
     }
 
-
-    function verif_win() {
-        let columns = board_gameRef.current.children
-
-        const color_coin = last_coin.coin.classList[0]
-        const coin_index_row = last_coin.index_coin
-        const column_id = last_coin.index_column
-
-        function check_row_coin(color, current_column, coin_row, columns) {
-            function check_coin(color, column_id_to_check, coin_row, columns) {
-
-                if (columns[column_id_to_check]) {
-                    if (columns[column_id_to_check].children[coin_row].classList[0] === color) {
-                        coin_verified.push(columns[column_id_to_check].children[coin_row])
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-
-            let coin_good = 1
-            let coin_verified = [last_coin.coin]
-
-            let column_check_back = current_column
-            column_check_back--
-
-            while (check_coin(color, column_check_back, coin_row, columns)) {
-                coin_good++
-                column_check_back--
-            }
-
-            let column_check_front = current_column
-            column_check_front++
-
-            while (check_coin(color, column_check_front, coin_row, columns)) {
-                coin_good++
-                column_check_front++
-            }
-            return { coin_good: coin_good, coin_wined: coin_verified }
-        }
-
-        function check_column_coin(color_coin, column_id, coin_index_row, columns) {
-            function check_coin(color, row_to_check, column) {
-                if (column.children[row_to_check]) {
-                    if (column.children[row_to_check].classList[0] === color) {
-                        coin_verified.push(column.children[row_to_check])
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-
-            let coin_good = 1
-            let coin_verified = [last_coin.coin]
-
-            let row_down = coin_index_row
-            row_down++
-            while (check_coin(color_coin, row_down, columns[column_id])) {
-                coin_good++
-                row_down++
-            }
-            return { coin_good: coin_good, coin_wined: coin_verified }
-        }
-
-        function check_diagonal_TopleftFromBottomright_coin(color, current_column, current_row, columns) {
-            function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
-                if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
-                    if (columns[column_id_to_check].children[row_check].classList[0] === color) {
-                        coin_verified.push(columns[column_id_to_check].children[row_check])
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-
-            let coin_good = 1
-            let coin_verified = [last_coin.coin]
-
-            let row_back = current_row
-            let column_check_back = current_column
-            column_check_back--
-            row_back--
-
-            while (check_coin(color, column_check_back, current_row, row_back, columns)) {
-                coin_good++
-                column_check_back--
-                row_back--
-            }
-
-            let row_front = current_row
-            let column_check_front = current_column
-            column_check_front++
-            row_front++
-
-            while (check_coin(color, column_check_front, current_row, row_front, columns)) {
-                coin_good++
-                column_check_front++
-                row_front++
-            }
-            return { coin_good: coin_good, coin_wined: coin_verified }
-        }
-        function check_diagonal_ToprightFromBottomleft_coin(color, current_column, current_row, columns) {
-            function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
-                if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
-                    if (columns[column_id_to_check].children[row_check].classList[0] === color) {
-                        coin_verified.push(columns[column_id_to_check].children[row_check])
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-
-            let coin_good = 1
-            let coin_verified = [last_coin.coin]
-
-
-            let row_back = current_row
-            let column_check_back = current_column
-            column_check_back++
-            row_back--
-
-            while (check_coin(color, column_check_back, current_row, row_back, columns)) {
-                coin_good++
-                column_check_back++
-                row_back--
-            }
-
-            let row_front = current_row
-            let column_check_front = current_column
-            column_check_front--
-            row_front++
-
-            while (check_coin(color, column_check_front, current_row, row_front, columns)) {
-                coin_good++
-                column_check_front--
-                row_front++
-            }
-            return { coin_good: coin_good, coin_wined: coin_verified }
-        }
-
-        let row_verif = check_row_coin(color_coin, column_id, coin_index_row, columns)
-        let column_verif = check_column_coin(color_coin, column_id, coin_index_row, columns)
-        let diagonal_TopleftFromBottomright_verif = check_diagonal_TopleftFromBottomright_coin(color_coin, column_id, coin_index_row, columns)
-        let diagonal_ToprightFromBottomleft_verif = check_diagonal_ToprightFromBottomleft_coin(color_coin, column_id, coin_index_row, columns)
-
-        console.log("row good : " + row_verif.coin_good);
-        console.log("column good : " + column_verif.coin_good);
-        console.log("diagonal_top_left good : " + diagonal_TopleftFromBottomright_verif.coin_good);
-        console.log("diagonal_top_right good : " + diagonal_ToprightFromBottomleft_verif.coin_good);
-
-        if (row_verif.coin_good >= 4) {
-            return { win: true, color_win: color_coin, coins_win: row_verif.coin_wined }
-        } else if (column_verif.coin_good >= 4) {
-            return { win: true, color_win: color_coin, coins_win: column_verif.coin_wined }
-        } else if (diagonal_TopleftFromBottomright_verif.coin_good >= 4) {
-            return { win: true, color_win: color_coin, coins_win: diagonal_TopleftFromBottomright_verif.coin_wined }
-        } else if (diagonal_ToprightFromBottomleft_verif.coin_good >= 4) {
-            return { win: true, color_win: color_coin, coins_win: diagonal_ToprightFromBottomleft_verif.coin_wined }
-        } else {
-            return { win: false, color_win: null, coins_win: null }
-        }
-    }
     return (
         <main id='Game'>
 

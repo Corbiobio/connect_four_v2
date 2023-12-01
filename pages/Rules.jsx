@@ -21,7 +21,7 @@ export default function Rules() {
                         <li><p>The starter of the previous game goes second on the next game.</p></li>
                     </ol>
                 </article>
-                <Link to="/"><img src="/images/icon-check.svg" alt="check" /></Link>
+                <Link to="/"><img src="/images/icon-check.svg" alt="check" draggable="false"/></Link>
             </section>
         </main>
     )

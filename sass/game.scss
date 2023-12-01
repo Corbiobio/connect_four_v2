@@ -2,6 +2,7 @@
     background-color: $purple;
     width: 100vw;
     height: 100vh;
+    user-select:none;
 
     .menu {
         height: 100vh;
@@ -279,7 +280,7 @@
                 height: fit-content;
                 cursor: default;
 
-                .bottom_turn {
+                .bottom_game_turn {
                     height: 120px;
                     width: 140px;
 
@@ -313,7 +314,7 @@
                     }
                 }
 
-                .bottom_win {
+                .bottom_game_finish {
                     transform: translate(0, 5%);
                     @include border;
                     background-color: white;
@@ -420,7 +421,7 @@
                 }
 
                 .board_bottom {
-                    .bottom_turn {
+                    .bottom_game_turn {
                         width: 190px;
                         height: 150px;
 
@@ -437,7 +438,7 @@
                         }
                     }
 
-                    .bottom_win {
+                    .bottom_game_finish {
                         transform: none;
                     }
                 }
