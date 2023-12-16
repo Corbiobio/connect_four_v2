@@ -10,7 +10,6 @@ $font_grey: #575757;
     box-sizing: border-box;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: bold;
-    text-transform: uppercase;
     color: black;
 }
 
@@ -28,16 +27,47 @@ body::-webkit-scrollbar {
     border-radius: 20px;
     box-shadow: 0px 10px 0px 0px #000000;
 }
+
 @mixin small_btn () {
     color: white;
-    background-color: #5C2DD5;
+    background-color: $dark_purple;
     text-decoration: none;
+    text-transform: uppercase;
     font-size: 16px;
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
-    min-width: 100px;
+    width: 110px;
     cursor: pointer;
+    transition: all 0.3s
+}
+
+@mixin large_btn () {
+    @include border;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    width: 90%;
+    height: 80px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 24px;
+    text-transform: uppercase;
+    line-height: 30px;
+    transition: all 0.3s;
+
+    img {
+        height: 100%;
+        width: auto;
+    }
+}
+
+@mixin large_btn_hover () {
+    border-color: $dark_purple;
+    transform: translateY(5px);
+    box-shadow: 0px 5px 0px 0px $dark_purple;
 }
 
 @import "home.scss";

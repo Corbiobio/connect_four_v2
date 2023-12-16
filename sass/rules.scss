@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    user-select:none;
+    user-select: none;
 
     section {
         cursor: default;
@@ -13,7 +13,7 @@
         border-radius: 40px;
         background-color: white;
         width: 90%;
-        padding: 20px 20px 45px 20px;
+        padding: 60px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -26,22 +26,24 @@
         }
 
         h1 {
-            padding: 10px 0;
+            margin-bottom: 30px;
             font-size: 56px;
+            text-transform: uppercase;
             text-align: center;
         }
 
         article {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
 
             h2 {
                 color: $purple;
-                margin-bottom: 15px;
+                margin-bottom: 10px;
+                text-transform: uppercase;
             }
 
             ol {
                 margin-left: 20px;
-                line-height: 45px;
+                line-height: 35px;
             }
         }
     }
@@ -60,7 +62,8 @@
             width: 100%;
             border-radius: 50px;
         }
-        img:hover{
+
+        img:hover {
             content: url(/images/icon-check_active.svg);
         }
     }

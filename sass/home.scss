@@ -4,7 +4,7 @@
     width: 100vw;
     display: flex;
     align-items: center;
-    user-select:none;
+    user-select: none;
 
     nav {
         width: 100%;
@@ -25,28 +25,11 @@
             width: 100%;
 
             .btn {
-                @include border;
-                display: flex;
-                background-color: white;
-                align-items: center;
-                justify-content: space-between;
-                padding: 15px;
-                width: 90%;
-                height: 80px;
-                text-decoration: none;
-                cursor: pointer;
-                font-size: 24px;
-                line-height: 30px;
-
-                img {
-                    height: 100%;
-                    width: auto;
-                }
+                @include large_btn;
             }
-            .btn:hover{
-                border-color: $dark_purple;
-                transform: translateY(5px);
-                box-shadow: 0px 5px 0px 0px $dark_purple;
+
+            .btn:hover {
+                @include large_btn_hover;
             }
         }
 
