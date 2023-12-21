@@ -7,7 +7,7 @@ export default function App() {
             <nav>
                 <img src="/images/logo.svg" alt="logo" draggable="false"/>
                 <div>
-                    <Link to="/game" className='btn'>Payer vs PLayer <img src="images/player-vs-player.svg" alt="player vs player" draggable="false"/></Link>
+                    <Link to="/game" className='btn'>Player vs PLayer <img src="images/player-vs-player.svg" alt="player vs player" draggable="false"/></Link>
                     <Link to="/rules" className='btn'>Game rules</Link>
                 </div>
             </nav>
