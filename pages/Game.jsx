@@ -208,102 +208,131 @@ export default function Game() {
                 const coin_good = [...before_coin_good,...after_coin_good]
                 return coin_good
             }
-            function check_diagonal_TopleftFromBottomright_coin(color, current_column, current_row, columns) {
-                function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
-                    if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
-                        if (columns[column_id_to_check].children[row_check].classList[0] === color) {
-                            coin_verified.push(columns[column_id_to_check].children[row_check])
-                            return true
-                        } else {
-                            return false
+            function check_north_west_to_south_east(column_id,row_id,color,columns){
+                function check_coins(column_id,row_id,color,columns,operation){
+                    const coin_good = []
+                    
+                    let coin_good_flag = true
+                    while (coin_good_flag) {
+                        if (operation === true) {
+                            row_id ++
+                            column_id ++
+                        }else{
+                            row_id --
+                            column_id --
                         }
+                        //if column and coin existe
+                        if (columns[column_id] && columns[column_id].children[row_id]) {   
+                            //get coin
+                            let current_coin = columns[column_id].children[row_id]
+                            
+                            // get next/befor coin class
+                            let current_class = current_coin.classList
+                            
+                            // dom token list to array
+                            current_class = [...current_class]
+                            
+                            if (current_class.includes(color)) {
+                                coin_good.push(current_coin)
+                            }else{
+                                // stop while
+                                coin_good_flag = false
+                            }
+                        }else{
+                        // stop while
+                        coin_good_flag = false
                     }
+                    }
+                    return coin_good
                 }
-    
-                let coin_good = 1
-                let coin_verified = [coin_info.coin]
-    
-                let row_back = current_row
-                let column_check_back = current_column
-                column_check_back--
-                row_back--
-    
-                while (check_coin(color, column_check_back, current_row, row_back, columns)) {
-                    coin_good++
-                    column_check_back--
-                    row_back--
-                }
-    
-                let row_front = current_row
-                let column_check_front = current_column
-                column_check_front++
-                row_front++
-    
-                while (check_coin(color, column_check_front, current_row, row_front, columns)) {
-                    coin_good++
-                    column_check_front++
-                    row_front++
-                }
-                return { coin_good: coin_good, coin_wined: coin_verified }
+                //true -> add | false -> remove
+                let operation = true
+                let after_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                operation = false
+                let before_coin_good = check_coins(column_id,row_id,color,columns,operation)
+
+                // all value in array
+                const coin_good = [...before_coin_good,...after_coin_good]
+                return coin_good
             }
-            function check_diagonal_ToprightFromBottomleft_coin(color, current_column, current_row, columns) {
-                function check_coin(color, column_id_to_check, coin_row, row_check, columns) {
-                    if (columns[column_id_to_check] && columns[column_id_to_check].children[row_check]) {
-                        if (columns[column_id_to_check].children[row_check].classList[0] === color) {
-                            coin_verified.push(columns[column_id_to_check].children[row_check])
-                            return true
-                        } else {
-                            return false
+            function check_south_west_to_north_east(column_id,row_id,color,columns){
+                function check_coins(column_id,row_id,color,columns,operation){
+                    const coin_good = []
+                    let coin_good_flag = true
+                    while (coin_good_flag) {
+                        if (operation === true) {
+                            row_id --
+                            column_id ++
+                        }else{
+                            row_id ++
+                            column_id --
                         }
+                        //if column and coin existe
+                        if (columns[column_id] && columns[column_id].children[row_id]) {   
+                            //get coin
+                            let current_coin = columns[column_id].children[row_id]
+                            
+                            // get next/befor coin class
+                            let current_class = current_coin.classList
+                            
+                            // dom token list to array
+                            current_class = [...current_class]
+                            
+                            if (current_class.includes(color)) {
+                                coin_good.push(current_coin)
+                            }else{
+                                // stop while
+                                coin_good_flag = false
+                            }
+                        }else{
+                        // stop while
+                        coin_good_flag = false
                     }
+                    }
+                    return coin_good
                 }
-    
-                let coin_good = 1
-                let coin_verified = [coin_info.coin]
-    
-    
-                let row_back = current_row
-                let column_check_back = current_column
-                column_check_back++
-                row_back--
-    
-                while (check_coin(color, column_check_back, current_row, row_back, columns)) {
-                    coin_good++
-                    column_check_back++
-                    row_back--
-                }
-    
-                let row_front = current_row
-                let column_check_front = current_column
-                column_check_front--
-                row_front++
-    
-                while (check_coin(color, column_check_front, current_row, row_front, columns)) {
-                    coin_good++
-                    column_check_front--
-                    row_front++
-                }
-                return { coin_good: coin_good, coin_wined: coin_verified }
+                //true -> add | false -> remove
+                let operation = true
+                let after_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                operation = false
+                let before_coin_good = check_coins(column_id,row_id,color,columns,operation)
+
+                // all value in array
+                const coin_good = [...before_coin_good,...after_coin_good]
+                return coin_good
             }
     
             let checked_raw = check_row(column_id,row_id,coin_color,columns)
             let checked_column = check_column(column_id,row_id,coin_color,columns)
-            let diagonal_TopleftFromBottomright_verif = check_diagonal_TopleftFromBottomright_coin(coin_color, column_id, row_id, columns)
-            let diagonal_ToprightFromBottomleft_verif = check_diagonal_ToprightFromBottomleft_coin(coin_color, column_id, row_id, columns)
+            let checked_north_west_to_south_east = check_north_west_to_south_east(column_id,row_id,coin_color,columns)
+            let checked_south_west_to_north_east = check_south_west_to_north_east(column_id,row_id,coin_color,columns)
     
             console.log("row good : " + (checked_raw.length+1));
             console.log("column good : " + (checked_column.length + 1));
-            // console.log("diagonal_top_left good : " + diagonal_TopleftFromBottomright_verif.coin_good);
-            // console.log("diagonal_top_right good : " + diagonal_ToprightFromBottomleft_verif.coin_good);
+            console.log("north_west_to_south_east good : " + (checked_north_west_to_south_east.length + 1));
+            console.log("south_west_to_north_east good: " + (checked_south_west_to_north_east.length + 1));
     
-            if (checked_raw.length + 1 >= 4) {
-                return { win: true, color_win: coin_color, coins_win: checked_raw }
-            } else if (checked_column.length + 1 >= 4) {
-                return { win: true, color_win: coin_color, coins_win: checked_column }
-            } else if (diagonal_TopleftFromBottomright_verif.coin_good >= 4) {
-                return { win: true, color_win: coin_color, coins_win: diagonal_TopleftFromBottomright_verif.coin_wined }
-            } else if (diagonal_ToprightFromBottomleft_verif.coin_good >= 4) {
-                return { win: true, color_win: coin_color, coins_win: diagonal_ToprightFromBottomleft_verif.coin_wined }
+            //coin being puted
+            let coin_good = [coin_info.coin]
+
+            //if 3 coin good without the coin puted
+            //add all coin to coin good
+            if (checked_raw.length >= 3) {
+                coin_good = [ ...coin_good, ...checked_raw]
+            }
+            if (checked_column.length >= 3) {
+                coin_good = [ ...coin_good, ...checked_column]
+            }
+            if (checked_north_west_to_south_east.length >= 3) {
+                coin_good = [ ...coin_good, ...checked_north_west_to_south_east]
+            }
+            if (checked_south_west_to_north_east.length >= 3) {
+                coin_good = [ ...coin_good, ...checked_south_west_to_north_east]
+            }
+
+            //if four coin connect -> win
+            if(coin_good.length >=4){
+                return { win: true, color_win: coin_color, coins_win: coin_good }
             } else {
                 return { win: false, color_win: null, coins_win: null }
             }
