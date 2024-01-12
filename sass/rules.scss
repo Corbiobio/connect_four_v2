@@ -57,14 +57,16 @@
         transform: translate(-50%, -50%);
         border-radius: 50px;
 
-        img {
+        svg {
             height: 100%;
             width: 100%;
             border-radius: 50px;
+
         }
 
-        img:hover {
-            content: url(/images/icon-check_active.svg);
+        svg:hover .contour{
+            
+            fill: $dark_purple;
         }
     }
 }

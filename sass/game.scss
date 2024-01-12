@@ -108,7 +108,7 @@
             justify-self: end;
             grid-area: 1 / 1 / 2 / 2;
 
-            img {
+            svg {
                 position: absolute;
                 left: 0;
                 top: 50%;
@@ -120,7 +120,7 @@
             justify-self: start;
             grid-area: 1 / 2 / 2 / 3;
 
-            img {
+            svg {
                 position: absolute;
                 right: 0;
                 top: 50%;
@@ -477,7 +477,7 @@
             .player_one {
                 grid-area: 2 / 1 / 3 / 2;
 
-                img {
+                svg {
                     top: 0;
                     left: 50%;
                 }
@@ -486,7 +486,7 @@
             .player_two {
                 grid-area: 2 / 3 / 3 / 4;
 
-                img {
+                svg {
                     top: 0;
                     right: 50%;
                 }
