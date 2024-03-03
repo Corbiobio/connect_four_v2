@@ -48,8 +48,7 @@
                 @include large_btn_hover
             }
 
-            .btn_menu_pink {
-                background-color: $pink;
+            .btn_menu_colored {
                 color: white;
             }
         }
@@ -63,7 +62,7 @@
         padding: 10px 0;
 
         .btn_nav {
-            @include small_btn
+            @include small_btn;
         }
 
         img {
@@ -145,7 +144,11 @@
                 width: 38px;
                 height: 36px;
 
-                img {
+                svg {
+                    path {
+                        transition: all .7s;
+                    }
+
                     display: none;
                 }
             }
@@ -193,17 +196,24 @@
                         height: 46px;
                         position: relative;
 
-                        picture {
-                            display: none;
-                            position: absolute;
+                        svg {
                             //default value for animation
                             animation-duration: 1.1s;
                             animation-fill-mode: forwards;
                             animation-iteration-count: 1;
                         }
 
+                        .coin_small {
+                            display: block;
+                        }
+
+                        .coin_large {
+                            display: none;
+                        }
+
                         .anim_coin_fall_5 {
                             animation-name: coin_5;
+                            animation-duration: 1.1s;
                         }
 
                         .anim_coin_fall_4 {
@@ -247,18 +257,6 @@
                             animation-iteration-count: infinite;
                         }
                     }
-
-                    .yellow {
-                        picture {
-                            display: block
-                        }
-                    }
-
-                    .red {
-                        picture {
-                            display: block
-                        }
-                    }
                 }
             }
 
@@ -285,34 +283,13 @@
                     height: 120px;
                     width: 140px;
 
-                    img {
+                    svg {
                         width: 100%;
                         height: 100%;
                         position: absolute;
-                    }
 
-                    div {
-                        position: relative;
-                        padding: 20px 0;
-                        text-align: center;
-                        height: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-
-                        p {
-                            color: black;
-                            font-size: 15px;
-                            text-transform: uppercase;
-                            margin-top: 10px;
-                        }
-
-                        strong {
-                            font-size: 40px;
-
-                            span {
-                                font-size: 25px;
-                            }
+                        path {
+                            transition: all 0.5s;
                         }
                     }
                 }
@@ -351,6 +328,7 @@
     }
 
     .bottom {
+        transition: all 1.5s;
         background-color: $dark_purple;
         width: 100%;
         // taille ecran - taille nav +taille game - translate
@@ -414,6 +392,14 @@
                         .item {
                             height: 75px;
                             width: 70px;
+
+                            .coin_small {
+                                display: none;
+                            }
+
+                            .coin_large {
+                                display: block;
+                            }
 
                             .circle {
                                 height: 50px;
@@ -502,14 +488,6 @@
             }
         }
     }
-}
-
-.btn_hover_red:hover {
-    background-color: $pink !important;
-}
-
-.btn_hover_yellow:hover {
-    background-color: $yellow !important;
 }
 
 @keyframes breath {

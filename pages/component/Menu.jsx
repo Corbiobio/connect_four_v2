@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Menu() {
+export default function Menu({ color_p1 }) {
     function continue_btn_click() {
         const menu = document.getElementById("menu")
         const menu_background = document.getElementById("menu_background")
@@ -10,11 +10,11 @@ export default function Menu() {
         menu_btn_container.style.animation = "menu_close 1.4s cubic-bezier(.75,0,.3,1) 1";
         menu_background.style.animation = "menu_close_background 1.4s";
 
-        setTimeout(()=>{
+        setTimeout(() => {
             menu_btn_container.style.animation = ""
             menu_background.style.animation = ""
             menu.style.display = "none"
-        },1200)
+        }, 1200)
     }
 
     return (
@@ -24,7 +24,7 @@ export default function Menu() {
                 <p>pause</p>
                 <div onClick={continue_btn_click} className='btn_menu'>continue game</div>
                 <a href="/game" className='btn_menu'>restart</a>
-                <Link className='btn_menu btn_menu_pink' to="/">quit game</Link>
+                <Link className='btn_menu btn_menu_colored' to="/" style={{ backgroundColor: color_p1 }}>quit game</Link>
             </div>
         </div>
     )

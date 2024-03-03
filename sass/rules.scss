@@ -19,6 +19,8 @@
         justify-content: space-around;
         position: relative;
         max-width: 600px;
+        animation-name: spawn_menu;
+        animation-duration: 1.5s;
 
         p {
             font-size: 16px;
@@ -62,11 +64,25 @@
             width: 100%;
             border-radius: 50px;
 
+            .contour {
+                transition: all .38s;
+            }
         }
 
-        svg:hover .contour{
-            
+        svg:hover .contour {
             fill: $dark_purple;
         }
+    }
+}
+
+@keyframes spawn_menu {
+    from {
+        transform: translateY(140%) translateX(140%);
+        scale: 0.1;
+    }
+
+    to {
+        scale: 1;
+        transform: translateY(0) translateX(0);
     }
 }

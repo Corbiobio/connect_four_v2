@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Player_one() {
+export default function Player_one({ color_p1 }) {
     if (!localStorage.getItem("player_one")) {
-        localStorage.setItem("player_one",0)
+        localStorage.setItem("player_one", 0)
     }
 
     return (
@@ -15,7 +15,7 @@ export default function Player_one() {
                     <g id="player-one">
                         <circle id="Oval-Copy-21" fill="#000000" cx="27" cy="27" r="27"></circle>
                         <circle id="Oval-Copy-40" fill="#000000" cx="27" cy="32" r="27"></circle>
-                        <circle id="Oval-Copy-11" fill="#FD6687" cx="27" cy="27" r="24"></circle>
+                        <circle id="Oval-Copy-11" fill={color_p1} cx="27" cy="27" r="24"></circle>
                         <g id="Group-8" transform="translate(19.000000, 17.000000)" stroke="#000000" strokeWidth="3">
                             <path d="M6,26.75 C12.627417,26.75 18,21.377417 18,14.75 C18,8.122583 12.627417,2.75 6,2.75" id="Oval-Copy-11" transform="translate(12.000000, 14.750000) rotate(90.000000) translate(-12.000000, -14.750000) "></path>
                             <g id="Group-7" transform="translate(9.750000, 0.000000)">

@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import Column from './component/Column'
 import Board_black from './component/Board_black'
@@ -12,52 +12,30 @@ import Board_bottom from './component/Board_bottom'
 
 export default function Game() {
 
-    //true = red | false = yellow
-    let [turn_color, setTurn_color] = useState(true)
+    //true = p1 | false = p2
+    let [player_turn, setPlayer_turn] = useState(true)
 
     let can_play = useRef(true)
+    let game_draw = useRef(false)
     let marker_containerRef = useRef(null)
     let board_gameRef = useRef(null)
     let boardRef = useRef(null)
-    let coin_info = useRef({ coin: null,coin_color: null, index_column: null, index_row: null })
+    let coin_info = useRef({ coin: null, coin_color: null, index_column: null, index_row: null })
     let board_bottomRef = useRef(null)
     let bottom_page = useRef(null)
 
-    const [{ turn_for_bottom, img_bottom }, dispatch_Img_bottom] = useReducer(reducer_Img_bottom, { turn: false, img_bottom: "/images/turn-background-red.svg" })
-    const [{ turn_for_marker, img_marker }, dispatch_Img_marker] = useReducer(reducer_Img_marker, { turn: false, img_marker: "/images/marker-red.svg" })
+    //get if color in local storage 
+    let color_p1 = localStorage.getItem("color_p1") ? localStorage.getItem("color_p1") : localStorage.setItem("color_p1", "#FD6687")
+    let color_p2 = localStorage.getItem("color_p2") ? localStorage.getItem("color_p2") : localStorage.setItem("color_p2", "#FFCE67")
 
-    function reducer_Img_marker({ turn, img_marker }, action) {
-        let red_img_marker = "/images/marker-red.svg";
-        let yellow_img_marker = "/images/marker-yellow.svg";
+    //if color is correct color ? true keep color : false default color
+    color_p1 = CSS.supports("fill", color_p1) ? color_p1 : "#FD6687"
+    color_p2 = CSS.supports("fill", color_p2) ? color_p2 : "#FFCE67"
 
-        switch (turn) {
-            case true:
-                return { turn: !turn, img_marker: red_img_marker }
-            case false:
-                return { turn: !turn, img_marker: yellow_img_marker }
-            default:
-                return { turn: turn, img_marker: red_img_marker }
-        }
-    }
-
-    function reducer_Img_bottom({ turn, img_bottom }, action) {
-        let red_img_bottom = "/images/turn-background-red.svg";
-        let yellow_img_bottom = "/images/turn-background-yellow.svg";
-
-        switch (turn) {
-            case true:
-                return { turn: !turn, img_bottom: red_img_bottom }
-            case false:
-                return { turn: !turn, img_bottom: yellow_img_bottom }
-            default:
-                return { turn: turn, img_bottom: red_img_bottom }
-        }
-    }
-
-    function get_color(color_bool){
-        if(color_bool){
+    function get_color(color_bool) {
+        if (color_bool) {
             return "red"
-        }else{
+        } else {
             return "yellow"
         }
     }
@@ -87,251 +65,304 @@ export default function Game() {
             while (i >= 0 && columnn_child[i].classList[0] !== "empty") {
                 i--
             }
-            
-            let color = get_color(turn_color)
+
+            let color = get_color(player_turn)
+
+
 
             columnn_child[i].className = `${color} item`
-            columnn_child[i].innerHTML = `<picture class=anim_coin_fall_${i}><source media= \"(min-width:750px)\" srcSet = \'/images/counter-${color}-large.svg\' /><img src=\"/images/counter-${color}-small.svg\" alt=\"coin\" /></picture >`
+            // columnn_child[i].innerHTML = `<picture class=anim_coin_fall_${i}><source media= \"(min-width:750px)\" srcSet = \'/images/counter-${color}-large.svg\' /><img src=\"/images/counter-${color}-small.svg\" alt=\"coin\" /></picture >`
+            columnn_child[i].innerHTML = `
+            <div class="anim_coin_fall_${i}">
+                <svg class="coin_small" width="41px" height="46px" viewBox="0 0 41 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>counter-small</title>
+                    <defs>
+                        <circle id="path-small-1" cx="19.9756098" cy="19.9756098" r="16.9756098"></circle>
+                        <filter x="-7.4%" y="-7.4%" width="114.7%" height="114.7%" filterUnits="objectBoundingBox" id="filter-small-2">
+                            <feOffset dx="0" dy="5" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+                            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+                            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+                        </filter>
+                    </defs>
+                    <g id="Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="assets" transform="translate(-231.000000, -744.000000)">
+                            <g id="Group-24" transform="translate(211.000000, 160.000000)">
+                                <g id="counter-small" transform="translate(20.975610, 584.975610)">
+                                    <circle id="Oval-Copy-49" fill="#000000" cx="20" cy="20" r="20"></circle>
+                                    <circle id="Oval-Copy-50" fill="#000000" cx="20" cy="25" r="20"></circle>
+                                    <g id="Oval-Copy-48">
+                                        <use fill=${player_turn ? color_p1 : color_p2} fill-rule="evenodd" xlink:href="#path-small-1"></use>
+                                        <use fill="black" fill-opacity="1" filter="url(#filter-small-2)" xlink:href="#path-small-1"></use>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg class="coin_large" width="70px" height="75px" viewBox="0 0 70 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>counter-large</title>
+                    <defs>
+                        <circle id="path-1" cx="35" cy="35" r="32"></circle>
+                        <filter x="-3.9%" y="-3.9%" width="107.8%" height="107.8%" filterUnits="objectBoundingBox" id="filter-2">
+                            <feOffset dx="0" dy="5" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+                            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+                            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+                        </filter>
+                    </defs>
+                    <g id="Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="counter-large">
+                            <circle id="Oval-Copy-41" fill="#000000" cx="35" cy="35" r="35"></circle>
+                            <circle id="Oval-Copy-42" fill="#000000" cx="35" cy="40" r="35"></circle>
+                            <g id="Oval-Copy-43">
+                                <use fill=${player_turn ? color_p1 : color_p2} fill-rule="evenodd" xlink:href="#path-1"></use>
+                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>`
 
-            coin_info = { coin: columnn_child[i],coin_color: get_color(turn_color) , index_column: column_id, index_row: i }
+            coin_info = { coin: columnn_child[i], coin_color: get_color(player_turn), index_column: column_id, index_row: i }
             game_turn(coin_info)
         }
     }
 
     function game_turn(coin_info) {
 
+        //verif if each coin is empty | false -> not draw 
         function verif_draw(columns) {
             let line_full = true
             for (let i = 0; i < columns.length; i++) {
                 //get first class of the highest coin of each column | value : red yellow or empty
-                if(columns[i].children[0].classList[0] === "empty"){
+                if (columns[i].children[0].classList[0] === "empty") {
+
                     line_full = false;
-                    break 
+                    break
                 }
             }
             return line_full
         }
-    
-        function verif_win(columns,coin_info) {
+
+        function verif_win(columns, coin_info) {
 
             const coin_color = coin_info.coin_color
             const row_id = coin_info.index_row
             const column_id = coin_info.index_column
-    
-            function check_row(column_id,row_id,color,columns){
-                function check_coins(column_id,row_id,color,columns,operation){
+
+            function check_row(column_id, row_id, color, columns) {
+                function check_coins(column_id, row_id, color, columns, operation) {
                     const coin_good = []
-                    
+
                     let coin_good_flag = true
                     while (coin_good_flag) {
                         if (operation === true) {
-                            column_id ++
-                        }else{
-                            column_id --
+                            column_id++
+                        } else {
+                            column_id--
                         }
                         //if column existe
-                        if (columns[column_id]) {   
+                        if (columns[column_id]) {
                             //get coin
                             let current_coin = columns[column_id].children[row_id]
-                            
+
                             // get next/befor coin class
                             let current_class = current_coin.classList
 
                             // dom token list to array
                             current_class = [...current_class]
-                            
+
                             if (current_class.includes(color)) {
                                 coin_good.push(current_coin)
-                            }else{
+                            } else {
                                 // stop while
                                 coin_good_flag = false
                             }
-                        }else{
-                        // stop while
-                        coin_good_flag = false
+                        } else {
+                            // stop while
+                            coin_good_flag = false
                         }
                     }
                     return coin_good
                 }
                 //true -> add | false -> remove
                 let operation = true
-                let after_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let after_coin_good = check_coins(column_id, row_id, color, columns, operation)
                 operation = false
-                let before_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let before_coin_good = check_coins(column_id, row_id, color, columns, operation)
 
                 // all value in array
-                const coin_good = [...before_coin_good,...after_coin_good]
+                const coin_good = [...before_coin_good, ...after_coin_good]
                 return coin_good
             }
-            function check_column(column_id,row_id,color,columns){
-                function check_coins(column_id,row_id,color,columns,operation){
+            function check_column(column_id, row_id, color, columns) {
+                function check_coins(column_id, row_id, color, columns, operation) {
                     const coin_good = []
-                    
+
                     let coin_good_flag = true
                     while (coin_good_flag) {
                         if (operation === true) {
-                            row_id ++
-                        }else{
-                            row_id --
+                            row_id++
+                        } else {
+                            row_id--
                         }
                         //if coin existe
-                        if (columns[column_id].children[row_id]) {   
+                        if (columns[column_id].children[row_id]) {
                             //get coin
                             let current_coin = columns[column_id].children[row_id]
-                            
+
                             // get next/befor coin class
                             let current_class = current_coin.classList
-                            
+
                             // dom token list to array
                             current_class = [...current_class]
-                            
+
                             if (current_class.includes(color)) {
                                 coin_good.push(current_coin)
-                            }else{
+                            } else {
                                 // stop while
                                 coin_good_flag = false
                             }
-                        }else{
-                        // stop while
-                        coin_good_flag = false
-                    }
+                        } else {
+                            // stop while
+                            coin_good_flag = false
+                        }
                     }
                     return coin_good
                 }
                 //true -> add | false -> remove
                 let operation = true
-                let after_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let after_coin_good = check_coins(column_id, row_id, color, columns, operation)
                 operation = false
-                let before_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let before_coin_good = check_coins(column_id, row_id, color, columns, operation)
 
                 // all value in array
-                const coin_good = [...before_coin_good,...after_coin_good]
+                const coin_good = [...before_coin_good, ...after_coin_good]
                 return coin_good
             }
-            function check_north_west_to_south_east(column_id,row_id,color,columns){
-                function check_coins(column_id,row_id,color,columns,operation){
+            function check_north_west_to_south_east(column_id, row_id, color, columns) {
+                function check_coins(column_id, row_id, color, columns, operation) {
                     const coin_good = []
-                    
+
                     let coin_good_flag = true
                     while (coin_good_flag) {
                         if (operation === true) {
-                            row_id ++
-                            column_id ++
-                        }else{
-                            row_id --
-                            column_id --
+                            row_id++
+                            column_id++
+                        } else {
+                            row_id--
+                            column_id--
                         }
                         //if column and coin existe
-                        if (columns[column_id] && columns[column_id].children[row_id]) {   
+                        if (columns[column_id] && columns[column_id].children[row_id]) {
                             //get coin
                             let current_coin = columns[column_id].children[row_id]
-                            
+
                             // get next/befor coin class
                             let current_class = current_coin.classList
-                            
+
                             // dom token list to array
                             current_class = [...current_class]
-                            
+
                             if (current_class.includes(color)) {
                                 coin_good.push(current_coin)
-                            }else{
+                            } else {
                                 // stop while
                                 coin_good_flag = false
                             }
-                        }else{
-                        // stop while
-                        coin_good_flag = false
-                    }
+                        } else {
+                            // stop while
+                            coin_good_flag = false
+                        }
                     }
                     return coin_good
                 }
                 //true -> add | false -> remove
                 let operation = true
-                let after_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let after_coin_good = check_coins(column_id, row_id, color, columns, operation)
                 operation = false
-                let before_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let before_coin_good = check_coins(column_id, row_id, color, columns, operation)
 
                 // all value in array
-                const coin_good = [...before_coin_good,...after_coin_good]
+                const coin_good = [...before_coin_good, ...after_coin_good]
                 return coin_good
             }
-            function check_south_west_to_north_east(column_id,row_id,color,columns){
-                function check_coins(column_id,row_id,color,columns,operation){
+            function check_south_west_to_north_east(column_id, row_id, color, columns) {
+                function check_coins(column_id, row_id, color, columns, operation) {
                     const coin_good = []
                     let coin_good_flag = true
                     while (coin_good_flag) {
                         if (operation === true) {
-                            row_id --
-                            column_id ++
-                        }else{
-                            row_id ++
-                            column_id --
+                            row_id--
+                            column_id++
+                        } else {
+                            row_id++
+                            column_id--
                         }
                         //if column and coin existe
-                        if (columns[column_id] && columns[column_id].children[row_id]) {   
+                        if (columns[column_id] && columns[column_id].children[row_id]) {
                             //get coin
                             let current_coin = columns[column_id].children[row_id]
-                            
+
                             // get next/befor coin class
                             let current_class = current_coin.classList
-                            
+
                             // dom token list to array
                             current_class = [...current_class]
-                            
+
                             if (current_class.includes(color)) {
                                 coin_good.push(current_coin)
-                            }else{
+                            } else {
                                 // stop while
                                 coin_good_flag = false
                             }
-                        }else{
-                        // stop while
-                        coin_good_flag = false
-                    }
+                        } else {
+                            // stop while
+                            coin_good_flag = false
+                        }
                     }
                     return coin_good
                 }
                 //true -> add | false -> remove
                 let operation = true
-                let after_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let after_coin_good = check_coins(column_id, row_id, color, columns, operation)
                 operation = false
-                let before_coin_good = check_coins(column_id,row_id,color,columns,operation)
+                let before_coin_good = check_coins(column_id, row_id, color, columns, operation)
 
                 // all value in array
-                const coin_good = [...before_coin_good,...after_coin_good]
+                const coin_good = [...before_coin_good, ...after_coin_good]
                 return coin_good
             }
-    
-            let checked_raw = check_row(column_id,row_id,coin_color,columns)
-            let checked_column = check_column(column_id,row_id,coin_color,columns)
-            let checked_north_west_to_south_east = check_north_west_to_south_east(column_id,row_id,coin_color,columns)
-            let checked_south_west_to_north_east = check_south_west_to_north_east(column_id,row_id,coin_color,columns)
-    
-            console.log("row good : " + (checked_raw.length+1));
+
+            let checked_raw = check_row(column_id, row_id, coin_color, columns)
+            let checked_column = check_column(column_id, row_id, coin_color, columns)
+            let checked_north_west_to_south_east = check_north_west_to_south_east(column_id, row_id, coin_color, columns)
+            let checked_south_west_to_north_east = check_south_west_to_north_east(column_id, row_id, coin_color, columns)
+
+            console.log("row good : " + (checked_raw.length + 1));
             console.log("column good : " + (checked_column.length + 1));
             console.log("north_west_to_south_east good : " + (checked_north_west_to_south_east.length + 1));
             console.log("south_west_to_north_east good: " + (checked_south_west_to_north_east.length + 1));
-    
+
             //coin being puted
             let coin_good = [coin_info.coin]
 
             //if 3 coin good without the coin puted
             //add all coin to coin good
             if (checked_raw.length >= 3) {
-                coin_good = [ ...coin_good, ...checked_raw]
+                coin_good = [...coin_good, ...checked_raw]
             }
             if (checked_column.length >= 3) {
-                coin_good = [ ...coin_good, ...checked_column]
+                coin_good = [...coin_good, ...checked_column]
             }
             if (checked_north_west_to_south_east.length >= 3) {
-                coin_good = [ ...coin_good, ...checked_north_west_to_south_east]
+                coin_good = [...coin_good, ...checked_north_west_to_south_east]
             }
             if (checked_south_west_to_north_east.length >= 3) {
-                coin_good = [ ...coin_good, ...checked_south_west_to_north_east]
+                coin_good = [...coin_good, ...checked_south_west_to_north_east]
             }
 
             //if four coin connect -> win
-            if(coin_good.length >=4){
+            if (coin_good.length >= 4) {
                 return { win: true, color_win: coin_color, coins_win: coin_good }
             } else {
                 return { win: false, color_win: null, coins_win: null }
@@ -339,7 +370,7 @@ export default function Game() {
         }
 
         //stop action on board
-        function stop_game(){
+        function stop_game() {
             //remove action on board 
             can_play.current = false
 
@@ -356,28 +387,12 @@ export default function Game() {
             }
         }
 
-        //change class for btn
-        function change_class_small_btn(color_status) {
-
-            let main_color = get_color(color_status);
-            let second_color = main_color === "red" ? "yellow" : "red"
-
-            let btn = document.getElementsByClassName("btn_hover_" + main_color)
-            //replace html collection by arr
-            btn = [...btn]
-
-            //replace class by other one
-            btn.map((btn)=>{
-                btn.classList.replace("btn_hover_" + main_color,"btn_hover_" + second_color)
-            })
-        }
-
         //get all columns
         let columns = board_gameRef.current.children
 
         //verif win or draw
         let verify_draw = verif_draw(columns)
-        let verify_win = verif_win(columns,coin_info)
+        let verify_win = verif_win(columns, coin_info)
 
         if (verify_win.win) {
             function win(color_win, coin_win) {
@@ -388,27 +403,29 @@ export default function Game() {
                 board_bottom_child[0].style.display = "none"
                 board_bottom_child[1].style.display = "flex"
 
-                //change bottom color
-                //update nbr of win 
+                //change bottom color and update nbr of win 
                 if (color_win === "red") {
-                    bottom_page.current.style.backgroundColor = "#FD6687"
-                    localStorage.setItem("player_one",parseInt(localStorage.getItem("player_one"))+1)
+                    bottom_page.current.style.backgroundColor = color_p1
+                    localStorage.setItem("player_one", parseInt(localStorage.getItem("player_one")) + 1)
                 } else {
-                    bottom_page.current.style.backgroundColor = "#FFCE67"
-                    localStorage.setItem("player_two",parseInt(localStorage.getItem("player_two"))+1)
+                    bottom_page.current.style.backgroundColor = color_p2
+                    localStorage.setItem("player_two", parseInt(localStorage.getItem("player_two")) + 1)
                 }
 
-                for (let i = 0; i < coin_win.length; i++) {
-                    //put circle on correct coin
-                    coin_win[i].innerHTML += "<img src=\"/images/circle-dot-filled-svgrepo-com.svg\" alt=\"circle\" class=\"circle\" />"
-                    //remove class because animation play a new time when win
-                    coin_win[i].firstElementChild.className = ""
-                }
+                setTimeout(() => {
+                    for (let i = 0; i < coin_win.length; i++) {
+                        //put circle on correct coin
+                        coin_win[i].innerHTML += "<img src=/images/circle-dot-filled-svgrepo-com.svg alt=circle class=circle />"
+
+                        //remove class to prevent animation play a new time when win
+                        coin_win[i].firstElementChild.classList.value = ""
+                    }
+                }, 1100)
             }
 
             win(verify_win.color_win, verify_win.coins_win)
-        }else if (verify_draw){
-            function draw(){
+        } else if (verify_draw) {
+            function draw() {
 
                 stop_game()
 
@@ -417,47 +434,29 @@ export default function Game() {
                 board_bottom_child[0].style.display = "none"
                 board_bottom_child[2].style.display = "flex"
 
-                // remove hover color on small btn
-                
-                let color = get_color(turn_color)
-
-                let btn = document.getElementsByClassName("btn_hover_" + color)
-                //replace html collection by arr
-                btn = [...btn]
-                //remove class
-                btn.map((btn)=>{
-                    btn.classList.remove("btn_hover_" + color)
-                })
+                game_draw.current = true
             }
 
             draw()
-
         } else {
-            //change color of marker and bottom div for each turn
-            dispatch_Img_marker(turn_for_marker)
-            dispatch_Img_bottom(turn_for_bottom)
-
-            //change hover color on small btn
-            change_class_small_btn(turn_color)
-            
-            setTurn_color(turn_color = !turn_color)
+            setPlayer_turn(player_turn = !player_turn)
         }
     }
 
     return (
         <main id='Game'>
 
-            <Menu />
+            <Menu color_p1={color_p1} />
 
-            <Nav_bar />
+            <Nav_bar color_p1={color_p1} color_p2={color_p2} player_turn={player_turn} game_draw={game_draw} />
 
             <div className='game'>
 
-                <Player_one />
+                <Player_one color_p1={color_p1} />
 
-                <Player_two />
+                <Player_two color_p2={color_p2} />
 
-                <Marker_container src_img={img_marker} ref_use={marker_containerRef} />
+                <Marker_container color_p1={color_p1} color_p2={color_p2} player_turn={player_turn} ref_use={marker_containerRef} />
 
                 <div className='board'>
                     <div className='column_for_marker' ref={boardRef}>
@@ -486,7 +485,7 @@ export default function Game() {
 
                     <Board_black />
 
-                    <Board_bottom turn={turn_color} src_img={img_bottom} ref_use={board_bottomRef} />
+                    <Board_bottom color_p1={color_p1} color_p2={color_p2} player_turn={player_turn} game_draw={game_draw} ref_use={board_bottomRef} />
                 </div>
             </div>
 
