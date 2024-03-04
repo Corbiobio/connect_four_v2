@@ -71,7 +71,6 @@ export default function Game() {
 
 
             columnn_child[i].className = `${color} item`
-            // columnn_child[i].innerHTML = `<picture class=anim_coin_fall_${i}><source media= \"(min-width:750px)\" srcSet = \'/images/counter-${color}-large.svg\' /><img src=\"/images/counter-${color}-small.svg\" alt=\"coin\" /></picture >`
             columnn_child[i].innerHTML = `
             <div class="anim_coin_fall_${i}">
                 <svg class="coin_small" width="41px" height="46px" viewBox="0 0 41 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

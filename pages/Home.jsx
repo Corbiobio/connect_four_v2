@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 export default function App() {
 
-    //get color for local storage
-    let color_p1 = localStorage.getItem("color_p1")
-    let color_p2 = localStorage.getItem("color_p2")
-    //if color in local storage and correct color ? true keep color : false default color
+    //get if color in local storage 
+    let color_p1 = localStorage.getItem("color_p1") ? localStorage.getItem("color_p1") : localStorage.setItem("color_p1", "#FD6687")
+    let color_p2 = localStorage.getItem("color_p2") ? localStorage.getItem("color_p2") : localStorage.setItem("color_p2", "#FFCE67")
+
+    //if color is correct color ? true keep color : false default color
     color_p1 = CSS.supports("fill", color_p1) ? color_p1 : "#FD6687"
     color_p2 = CSS.supports("fill", color_p2) ? color_p2 : "#FFCE67"
 
