@@ -250,11 +250,13 @@
                             left: 20%;
                             z-index: 6;
                             filter: brightness(0) saturate(100%) invert(98%) sepia(4%) saturate(395%) hue-rotate(240deg) brightness(117%) contrast(100%);
-                            animation-name: breath;
-                            animation-duration: 1s;
-                            animation-direction: alternate;
-                            animation-timing-function: linear;
-                            animation-iteration-count: infinite;
+                            animation-name: breath, spawn;
+                            animation-duration: 1.2s, 1.5s;
+                            //delay of breath = spawn duration
+                            animation-delay: 1.5s, 0s;
+                            animation-direction: alternate, normal;
+                            animation-timing-function: linear, linear;
+                            animation-iteration-count: infinite, 1;
                         }
                     }
                 }
@@ -404,7 +406,6 @@
                             .circle {
                                 height: 50px;
                                 width: 50px;
-                                animation-name: breath;
                                 top: 15%;
                                 left: 15%;
                             }
@@ -487,6 +488,16 @@
                 grid-area: 2 / 2 / 3 / 3;
             }
         }
+    }
+}
+
+@keyframes spawn {
+    from {
+        scale: 0;
+    }
+
+    to {
+        scale: 1;
     }
 }
 

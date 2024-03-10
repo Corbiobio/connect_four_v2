@@ -411,15 +411,13 @@ export default function Game() {
                     localStorage.setItem("player_two", parseInt(localStorage.getItem("player_two")) + 1)
                 }
 
-                setTimeout(() => {
-                    for (let i = 0; i < coin_win.length; i++) {
-                        //put circle on correct coin
-                        coin_win[i].innerHTML += "<img src=/images/circle-dot-filled-svgrepo-com.svg alt=circle class=circle />"
+                for (let i = 0; i < coin_win.length; i++) {
+                    //put circle on correct coin
+                    coin_win[i].innerHTML += "<img src=/images/circle-dot-filled-svgrepo-com.svg alt=circle class=circle />"
 
-                        //remove class to prevent animation play a new time when win
-                        coin_win[i].firstElementChild.classList.value = ""
-                    }
-                }, 1100)
+                    //remove class to prevent animation play a new time when win
+                    coin_win[i].firstElementChild.classList.value = ""
+                }
             }
 
             win(verify_win.color_win, verify_win.coins_win)
