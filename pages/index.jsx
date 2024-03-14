@@ -6,14 +6,14 @@ import Game from "./Game";
 import Rules from "./Rules";
 
 const router = createBrowserRouter([{
-    path: "/", element:
+    path: "/connect_four_v2", element:
         <Home />
 }, {
-    path: "game", element:
+    path: "/connect_four_v2/game", element:
         <Game />
 }, {
 
-    path: "rules", element:
+    path: "/connect_four_v2/rules", element:
         <Rules />
 }])
 const root = createRoot(document.getElementById("root"));

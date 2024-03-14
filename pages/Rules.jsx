@@ -30,7 +30,7 @@ export default function Rules() {
                         <li><p>The starter of the previous game goes second on the next game.</p></li>
                     </ol>
                 </article>
-                <Link to="/">
+                <Link to="/connect_four_v2">
                     <svg width="70px" height="75px" viewBox="0 0 70 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <title>icon-check</title>
                         <g id="Designs" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

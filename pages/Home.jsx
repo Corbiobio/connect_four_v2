@@ -43,7 +43,7 @@ export default function App() {
                 </svg>
 
                 <div>
-                    <Link to="/game" className='btn' style={{ backgroundColor: color_p1 }}>
+                    <Link to="/connect_four_v2/game" className='btn' style={{ backgroundColor: color_p1 }}>
                         Player vs PLayer
                         <svg width="82px" height="46px" viewBox="0 0 82 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                             <title>player-vs-player</title>
@@ -73,7 +73,7 @@ export default function App() {
                             </g>
                         </svg>
                     </Link>
-                    <Link to="/rules" className='btn'>Game rules</Link>
+                    <Link to="/connect_four_v2/rules" className='btn'>Game rules</Link>
                 </div>
             </nav>
         </main >

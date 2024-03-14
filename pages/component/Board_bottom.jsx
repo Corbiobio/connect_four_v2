@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Board_bottom({ color_p1, color_p2, player_turn, game_draw, ref_use }) {
 
@@ -54,11 +55,11 @@ export default function Board_bottom({ color_p1, color_p2, player_turn, game_dra
             <div className='bottom_game_finish'>
                 <p>player {turn_player.current}</p>
                 <strong>wins</strong>
-                <a onMouseEnter={btn_enter} onMouseLeave={btn_leave} href='/game'>play again</a>
+                <Link onClick={() => { window.location.reload(false) }} onMouseEnter={btn_enter} onMouseLeave={btn_leave} to='/game'>play again</Link>
             </div>
             <div className='bottom_game_finish'>
                 <strong>Draw</strong>
-                <a onMouseEnter={btn_enter} onMouseLeave={btn_leave} href='/game'>play again</a>
+                <Link onClick={() => { window.location.reload(false) }} onMouseEnter={btn_enter} onMouseLeave={btn_leave} to='/game'>play again</Link>
             </div>
         </div>
     )

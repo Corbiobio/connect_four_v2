@@ -4,6 +4,14 @@
     height: 100vh;
     user-select: none;
 
+    .item_small {
+        display: block;
+    }
+
+    .item_large {
+        display: none;
+    }
+
     .menu {
         height: 100vh;
         width: 100vw;
@@ -196,19 +204,11 @@
                         height: 46px;
                         position: relative;
 
-                        svg {
+                        .coin {
                             //default value for animation
                             animation-duration: 1.1s;
                             animation-fill-mode: forwards;
                             animation-iteration-count: 1;
-                        }
-
-                        .coin_small {
-                            display: block;
-                        }
-
-                        .coin_large {
-                            display: none;
                         }
 
                         .anim_coin_fall_5 {
@@ -346,6 +346,14 @@
         height: 100%;
         width: 100%;
 
+        .item_small {
+            display: none;
+        }
+
+        .item_large {
+            display: block;
+        }
+
         .menu {
             .menu_btn_container {
                 max-width: 550px;
@@ -394,14 +402,6 @@
                         .item {
                             height: 75px;
                             width: 70px;
-
-                            .coin_small {
-                                display: none;
-                            }
-
-                            .coin_large {
-                                display: block;
-                            }
 
                             .circle {
                                 height: 50px;

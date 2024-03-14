@@ -30,7 +30,7 @@ export default function Nav_bar({ color_p1, color_p2, player_turn, game_draw }) 
     return (
         <nav>
             <button onMouseEnter={btn_enter} onMouseLeave={btn_leave} className='btn_nav' id='menu_btn' onClick={menuClick} >menu</button>
-            <Link to="/">
+            <Link to="/connect_four_v2">
                 <svg width="58px" height="61px" viewBox="0 0 58 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                     <title>logo</title>
                     <g id="Designs" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -59,6 +59,6 @@ export default function Nav_bar({ color_p1, color_p2, player_turn, game_draw }) 
                     </g>
                 </svg>
             </Link>
-            <a href="/game" onMouseEnter={btn_enter} onMouseLeave={btn_leave} className='btn_nav'>restart</a>
+            <Link to="/connect_four_v2/game" onMouseEnter={btn_enter} onMouseLeave={btn_leave} className='btn_nav'>restart</Link>
         </nav>)
 }

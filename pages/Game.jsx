@@ -73,7 +73,7 @@ export default function Game() {
             columnn_child[i].className = `${color} item`
             columnn_child[i].innerHTML = `
             <div class="anim_coin_fall_${i}">
-                <svg class="coin_small" width="41px" height="46px" viewBox="0 0 41 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="item_small coin" width="41px" height="46px" viewBox="0 0 41 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>counter-small</title>
                     <defs>
                         <circle id="path-small-1" cx="19.9756098" cy="19.9756098" r="16.9756098"></circle>
@@ -98,7 +98,7 @@ export default function Game() {
                         </g>
                     </g>
                 </svg>
-                <svg class="coin_large" width="70px" height="75px" viewBox="0 0 70 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="item_large coin" width="70px" height="75px" viewBox="0 0 70 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>counter-large</title>
                     <defs>
                         <circle id="path-1" cx="35" cy="35" r="32"></circle>
@@ -413,7 +413,17 @@ export default function Game() {
 
                 for (let i = 0; i < coin_win.length; i++) {
                     //put circle on correct coin
-                    coin_win[i].innerHTML += "<img src=/images/circle-dot-filled-svgrepo-com.svg alt=circle class=circle />"
+                    coin_win[i].innerHTML += `
+                    <svg class=circle width="800px" height="800px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>circle-dot-filled</title>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="drop" fill="#000000" transform="translate(42.666667, 42.666667)">
+                                <path d="M213.333333,3.55271368e-14 C331.15408,3.55271368e-14 426.666667,95.5125867 426.666667,213.333333 C426.666667,331.15408 331.15408,426.666667 213.333333,426.666667 C95.5125867,426.666667 3.55271368e-14,331.15408 3.55271368e-14,213.333333 C3.55271368e-14,95.5125867 95.5125867,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,106.666667 C154.42296,106.666667 106.666667,154.42296 106.666667,213.333333 C106.666667,272.243707 154.42296,320 213.333333,320 C272.243707,320 320,272.243707 320,213.333333 C320,154.42296 272.243707,106.666667 213.333333,106.666667 Z" id="Combined-Shape">
+
+                    </path>
+                            </g>
+                        </g>
+                    </svg>`
 
                     //remove class to prevent animation play a new time when win
                     coin_win[i].firstElementChild.classList.value = ""
