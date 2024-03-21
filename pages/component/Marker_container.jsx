@@ -1,14 +1,6 @@
-import React, { useRef } from 'react'
+import React from 'react'
 
-export default function Marker_container({ color_p1, color_p2, player_turn, ref_use }) {
-
-    let color_player = useRef("#FD6687");
-    //define player  color
-    if (player_turn) {
-        color_player.current = color_p1
-    } else {
-        color_player.current = color_p2
-    }
+export default function Marker_container({ player_color, ref_use }) {
 
     return (
         <div className='marker_container' ref={ref_use}>
@@ -24,7 +16,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>
@@ -41,7 +33,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>
@@ -58,7 +50,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>
@@ -75,7 +67,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>
@@ -92,7 +84,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>
@@ -109,7 +101,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>
@@ -126,7 +118,7 @@ export default function Marker_container({ color_p1, color_p2, player_turn, ref_
                         <path d="m882.01 132.377 10.932-8.157a5 5 0 0 1 5.96-.015l11.068 8.172A5 5 0 0 1 912 136.4v6.6a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5v-6.616a5 5 0 0 1 2.01-4.007Z" id="border_2" />
                     </defs>
                     <g transform="matrix(1 0 0 -1 -877 156)" fill="none" fillRule="evenodd"><use fill="#000" filter="url(#border_1)" xlinkHref="#border_2" />
-                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M895.916 121.727a6.49 6.49 0 0 1 3.877 1.271l11.068 8.173a6.5 6.5 0 0 1 2.639 5.229v6.6a6.48 6.48 0 0 1-1.904 4.596A6.48 6.48 0 0 1 907 149.5h-22a6.48 6.48 0 0 1-4.596-1.904A6.48 6.48 0 0 1 878.5 143v-6.616a6.5 6.5 0 0 1 2.613-5.21l10.932-8.157a6.49 6.49 0 0 1 3.87-1.29Z" fill={player_color} />
                     </g>
                 </svg>
             </div>

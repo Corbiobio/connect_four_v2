@@ -1,8 +1,8 @@
 import React from "react";
 
-function Column() {
+function Column(index) {
     return (
-        <div className='column'>
+        <div className='column' id={"column_" + index.index}>
             <div className="empty item">
             </div>
 

@@ -1,29 +1,16 @@
 import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import Column from './component/Column'
 import Board_black from './component/Board_black'
 import Board_white from './component/Board_white'
 import Player_one from './component/Player_one'
 import Player_two from './component/Player_two'
-import Nav_bar from './component/Nav_bar'
 import Menu from './component/Menu'
 import Marker_container from './component/Marker_container'
 import Board_bottom from './component/Board_bottom'
 
 export default function Game() {
-
-    //true = p1 | false = p2
-    let [player_turn, setPlayer_turn] = useState(true)
-
-    let can_play = useRef(true)
-    let game_draw = useRef(false)
-    let marker_containerRef = useRef(null)
-    let board_gameRef = useRef(null)
-    let boardRef = useRef(null)
-    let coin_info = useRef({ coin: null, coin_color: null, index_column: null, index_row: null })
-    let board_bottomRef = useRef(null)
-    let bottom_page = useRef(null)
-
     //get if color in local storage 
     let color_p1 = localStorage.getItem("color_p1") ? localStorage.getItem("color_p1") : localStorage.setItem("color_p1", "#FD6687")
     let color_p2 = localStorage.getItem("color_p2") ? localStorage.getItem("color_p2") : localStorage.setItem("color_p2", "#FFCE67")
@@ -31,6 +18,23 @@ export default function Game() {
     //if color is correct color ? true keep color : false default color
     color_p1 = CSS.supports("fill", color_p1) ? color_p1 : "#FD6687"
     color_p2 = CSS.supports("fill", color_p2) ? color_p2 : "#FFCE67"
+
+    //true = p1 | false = p2
+    let [player_turn, setPlayer_turn] = useState(true)
+    //current color player
+    let [player_color, setPlayer_color] = useState(color_p1)
+    //amount of column
+    let [amount_columns, setAmount_columns] = useState(7);
+
+    let can_play = useRef(true)
+    let game_draw = useRef(false)
+    let game_win = useRef(false)
+    let marker_containerRef = useRef(null)
+    let board_gameRef = useRef(null)
+    let boardRef = useRef(null)
+    let coin_info = useRef({ coin: null, coin_color: null, index_column: null, index_row: null })
+    let board_bottomRef = useRef(null)
+    let bottom_page = useRef(null)
 
     function get_color(color_bool) {
         if (color_bool) {
@@ -40,14 +44,17 @@ export default function Game() {
         }
     }
 
+    //diplay marker on top of board
     function display_marker(column) {
         let column_id = parseInt(column.id)
         let marker_container_child = marker_containerRef.current.children
 
+        //undisplay every marker
         for (let i = 0; i < marker_container_child.length; i++) {
             marker_container_child[i].children[0].style.display = "none"
         }
 
+        //dislay correct marker
         marker_container_child[column_id].children[0].style.display = "block"
     }
 
@@ -90,7 +97,7 @@ export default function Game() {
                                     <circle id="Oval-Copy-49" fill="#000000" cx="20" cy="20" r="20"></circle>
                                     <circle id="Oval-Copy-50" fill="#000000" cx="20" cy="25" r="20"></circle>
                                     <g id="Oval-Copy-48">
-                                        <use fill=${player_turn ? color_p1 : color_p2} fill-rule="evenodd" xlink:href="#path-small-1"></use>
+                                        <use fill=${player_color} fill-rule="evenodd" xlink:href="#path-small-1"></use>
                                         <use fill="black" fill-opacity="1" filter="url(#filter-small-2)" xlink:href="#path-small-1"></use>
                                     </g>
                                 </g>
@@ -113,7 +120,7 @@ export default function Game() {
                             <circle id="Oval-Copy-41" fill="#000000" cx="35" cy="35" r="35"></circle>
                             <circle id="Oval-Copy-42" fill="#000000" cx="35" cy="40" r="35"></circle>
                             <g id="Oval-Copy-43">
-                                <use fill=${player_turn ? color_p1 : color_p2} fill-rule="evenodd" xlink:href="#path-1"></use>
+                                <use fill=${player_color} fill-rule="evenodd" xlink:href="#path-1"></use>
                                 <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
                             </g>
                         </g>
@@ -376,7 +383,7 @@ export default function Game() {
             //remove marker
             let marker_child = marker_containerRef.current.children
             for (let i = 0; i < marker_child.length; i++) {
-                marker_child[i].style.display = "none"
+                marker_child[i].children[0].style.display = "none"
             }
 
             //cursor default on each column
@@ -394,22 +401,25 @@ export default function Game() {
         let verify_win = verif_win(columns, coin_info)
 
         if (verify_win.win) {
-            function win(color_win, coin_win) {
+            function win(coin_win) {
                 stop_game()
+
+                //set state of game to win
+                game_win.current = true
 
                 //display win bottom
                 let board_bottom_child = board_bottomRef.current.children
                 board_bottom_child[0].style.display = "none"
                 board_bottom_child[1].style.display = "flex"
 
-                //change bottom color and update nbr of win 
-                if (color_win === "red") {
-                    bottom_page.current.style.backgroundColor = color_p1
+                //update nbr of win 
+                if (player_turn) {
                     localStorage.setItem("player_one", parseInt(localStorage.getItem("player_one")) + 1)
                 } else {
-                    bottom_page.current.style.backgroundColor = color_p2
                     localStorage.setItem("player_two", parseInt(localStorage.getItem("player_two")) + 1)
                 }
+                //change bottom color 
+                bottom_page.current.style.backgroundColor = player_color
 
                 for (let i = 0; i < coin_win.length; i++) {
                     //put circle on correct coin
@@ -430,7 +440,7 @@ export default function Game() {
                 }
             }
 
-            win(verify_win.color_win, verify_win.coins_win)
+            win(verify_win.coins_win)
         } else if (verify_draw) {
             function draw() {
 
@@ -446,8 +456,76 @@ export default function Game() {
 
             draw()
         } else {
+            //inverse player turn
             setPlayer_turn(player_turn = !player_turn)
+
+            //set color for player 
+            if (player_turn) {
+                setPlayer_color(color_p1)
+            } else {
+                setPlayer_color(color_p2)
+            }
         }
+    }
+
+    //give data to an array to make a .map for create each column
+    function create_array(index) {
+        const array = []
+        for (let i = 0; i < index; i++) {
+            array.push(i)
+        }
+        return array
+    }
+
+    // restart game
+    function restart_game() {
+        setAmount_columns(0);
+
+        //if player 2 set turn to player 1
+        if (!player_turn) {
+            setPlayer_turn(true)
+        }
+        if (game_win || game_draw) {
+            //display draw bottom
+            let board_bottom_child = board_bottomRef.current.children
+            board_bottom_child[0].style.display = "flex"
+            board_bottom_child[1].style.display = "none"
+            board_bottom_child[2].style.display = "none"
+        }
+
+        //set bottom color to default
+        bottom_page.current.style.backgroundColor = "#5C2DD5"
+
+        //set state of the game to default value
+        can_play.current = true
+        game_win.current = false
+        game_draw.current = false
+
+        //let react have time to execute the first setAmount_columns
+        setTimeout(() => {
+            setAmount_columns(7);
+        }, 1)
+    }
+
+    //show menu
+    function display_menu() {
+        const menu = document.getElementById("menu")
+        menu.style.display = "flex"
+    }
+
+    //create hover dynamically 
+    function update_background_color(color, event) {
+        //if game not draw
+        if (!game_draw.current) {
+            //put color
+            event.target.style.backgroundColor = color
+        }
+    }
+
+    //remove hover
+    function resset_background_color(event) {
+        //put color
+        event.target.style.backgroundColor = "#5c2dd5"
     }
 
     return (
@@ -455,7 +533,39 @@ export default function Game() {
 
             <Menu color_p1={color_p1} />
 
-            <Nav_bar color_p1={color_p1} color_p2={color_p2} player_turn={player_turn} game_draw={game_draw} />
+            <nav>
+                <button onMouseEnter={event => { update_background_color(player_color, event) }} onMouseLeave={resset_background_color} className='btn_nav' id='menu_btn' onClick={display_menu} >menu</button>
+                <Link to="/connect_four_v2">
+                    <svg width="58px" height="61px" viewBox="0 0 58 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+                        <title>logo</title>
+                        <g id="Designs" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                            <g id="assets" transform="translate(-432.000000, -742.000000)">
+                                <g id="Group-24" transform="translate(211.000000, 160.000000)">
+                                    <g id="logo" transform="translate(221.000000, 582.000000)">
+                                        <g id="Group-23" fill="#000000">
+                                            <circle id="Oval-Copy-47" cx="13" cy="13" r="13"></circle>
+                                            <circle id="Oval-Copy-51" cx="45" cy="13" r="13"></circle>
+                                            <circle id="Oval-Copy-53" cx="13" cy="45" r="13"></circle>
+                                            <circle id="Oval-Copy-52" cx="45" cy="45" r="13"></circle>
+                                        </g>
+                                        <g id="Group-23-Copy" transform="translate(0.000000, 3.000000)" fill="#000000">
+                                            <circle id="Oval-Copy-47" cx="13" cy="13" r="13"></circle>
+                                            <circle id="Oval-Copy-51" cx="45" cy="13" r="13"></circle>
+                                            <circle id="Oval-Copy-53" cx="13" cy="45" r="13"></circle>
+                                            <circle id="Oval-Copy-52" cx="45" cy="45" r="13"></circle>
+                                        </g>
+                                        <circle id="Oval-Copy-11" fill={color_p1} cx="13" cy="13" r="10"></circle>
+                                        <circle id="Oval-Copy-25" fill={color_p1} cx="45" cy="45" r="10"></circle>
+                                        <circle id="Oval-Copy-23" fill={color_p2} cx="45" cy="13" r="10"></circle>
+                                        <circle id="Oval-Copy-24" fill={color_p2} cx="13" cy="45" r="10"></circle>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </Link>
+                <button onClick={restart_game} onMouseEnter={event => { update_background_color(player_color, event) }} onMouseLeave={resset_background_color} className='btn_nav'>restart</button>
+            </nav>
 
             <div className='game'>
 
@@ -463,7 +573,7 @@ export default function Game() {
 
                 <Player_two color_p2={color_p2} />
 
-                <Marker_container color_p1={color_p1} color_p2={color_p2} player_turn={player_turn} ref_use={marker_containerRef} />
+                <Marker_container player_color={player_color} ref_use={marker_containerRef} />
 
                 <div className='board'>
                     <div className='column_for_marker' ref={boardRef}>
@@ -479,15 +589,12 @@ export default function Game() {
                     <Board_white />
 
                     <div className='board_game' ref={board_gameRef}>
-
-                        <Column />
-                        <Column />
-                        <Column />
-                        <Column />
-                        <Column />
-                        <Column />
-                        <Column />
-
+                        {
+                            //get array with correct amount of columns
+                            create_array(amount_columns).map((element, index) => (
+                                <Column key={index} index={index} />
+                            ))
+                        }
                     </div>
 
                     <Board_black />
