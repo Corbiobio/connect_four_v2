@@ -481,9 +481,11 @@ export default function Game() {
     function restart_game() {
         setAmount_columns(0);
 
-        //if player 2 set turn to player 1
+        //if player 2 set turn and color to player 1
         if (!player_turn) {
             setPlayer_turn(true)
+            //set color for player 
+            setPlayer_color(color_p1)
         }
         if (game_win || game_draw) {
             //display draw bottom
