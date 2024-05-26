@@ -73,9 +73,8 @@
             @include small_btn;
         }
 
-        img {
-            height: 55px;
-            width: 55px;
+        svg circle {
+            transition: $transition_default;
         }
     }
 
@@ -88,8 +87,8 @@
         justify-items: center;
 
         .player {
-            cursor: default;
             @include border;
+            cursor: default;
             background-color: white;
             display: flex;
             flex-direction: column;
@@ -97,6 +96,11 @@
             position: relative;
             padding: 10px 0;
             width: 155px;
+            transition: $transition_default;
+
+            svg circle {
+                transition: $transition_default;
+            }
 
             p {
                 color: black;
@@ -168,7 +172,6 @@
             position: relative;
             grid-area: 3 / 1 / 4 / 3;
 
-
             .board_white {
                 z-index: 3;
                 position: absolute;
@@ -209,6 +212,10 @@
                             animation-duration: 1.1s;
                             animation-fill-mode: forwards;
                             animation-iteration-count: 1;
+
+                            use {
+                                transition: $transition_default;
+                            }
                         }
 
                         .anim_coin_fall_5 {
@@ -259,6 +266,10 @@
                             animation-iteration-count: infinite, 1;
                         }
                     }
+
+                    .item_win .circle {
+                        display: block
+                    }
                 }
             }
 
@@ -291,7 +302,7 @@
                         position: absolute;
 
                         path {
-                            transition: all 0.5s;
+                            transition: $transition_default;
                         }
                     }
                 }

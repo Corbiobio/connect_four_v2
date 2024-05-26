@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ColorContext } from "./ColorContext"
 
-export default function Player_one({ color_p1 }) {
+export default function Player_one() {
+    let color_p1 = useContext(ColorContext).ColorP1
+
     if (!localStorage.getItem("player_one")) {
         localStorage.setItem("player_one", 0)
     }

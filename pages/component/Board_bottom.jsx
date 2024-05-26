@@ -1,23 +1,27 @@
-import React, { useRef } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { ColorContext } from "./ColorContext"
 
-export default function Board_bottom({ color_p1, color_p2, player_turn, game_draw, ref_use }) {
+export default function Board_bottom({ player_turn, game_draw, ref_use }) {
 
-    let turn_player = useRef(1)
-    let color_player = useRef("#FD6687");
+    const color = useContext(ColorContext)
+
+    let turn_player
+    let color_player
+
     //define player number and color
     if (player_turn) {
-        turn_player.current = 1
-        color_player.current = color_p1
+        turn_player = 1
+        color_player = color.ColorP1
     } else {
-        turn_player.current = 2
-        color_player.current = color_p2
+        turn_player = 2
+        color_player = color.ColorP2
     }
 
     //create hover dynamically 
     function btn_enter(event) {
         if (!game_draw.current) {
-            event.target.style.backgroundColor = color_player.current
+            event.target.style.backgroundColor = color_player
         }
     }
 
@@ -40,11 +44,11 @@ export default function Board_bottom({ color_p1, color_p2, player_turn, game_dra
                     </defs>
                     <g transform="translate(3 2)" fill="none" fillRule="evenodd">
                         <use fill="#000" filter="url(#a)" xlinkHref="#b" />
-                        <path stroke="#000" strokeWidth="3" d="M86.697 1.868a21.5 21.5 0 0 1 16.613-.03l75.96 31.65a21.478 21.478 0 0 1 9.62 7.92 21.478 21.478 0 0 1 3.61 11.925V130a21.433 21.433 0 0 1-6.297 15.203A21.433 21.433 0 0 1 171 151.5H20a21.433 21.433 0 0 1-15.203-6.297A21.433 21.433 0 0 1-1.5 130V53.28c0-4.326 1.296-8.44 3.589-11.893a21.478 21.478 0 0 1 9.568-7.923Z" fill={color_player.current} />
+                        <path stroke="#000" strokeWidth="3" d="M86.697 1.868a21.5 21.5 0 0 1 16.613-.03l75.96 31.65a21.478 21.478 0 0 1 9.62 7.92 21.478 21.478 0 0 1 3.61 11.925V130a21.433 21.433 0 0 1-6.297 15.203A21.433 21.433 0 0 1 171 151.5H20a21.433 21.433 0 0 1-15.203-6.297A21.433 21.433 0 0 1-1.5 130V53.28c0-4.326 1.296-8.44 3.589-11.893a21.478 21.478 0 0 1 9.568-7.923Z" fill={color_player} />
                     </g>
                     <g fill="black" fontFamily="SpaceGrotesk-Bold, Space Grotesk" fontWeight="bold">
                         <text fontSize="16" transform="translate(45 41)">
-                            <tspan x="1.64" y="16">Player {turn_player.current}'s turn</tspan>
+                            <tspan x="1.64" y="16">Player {turn_player}'s turn</tspan>
                         </text>
                         <text fontSize="56" transform="translate(51 41)">
                             <tspan x=".872" y="77">00s</tspan>
@@ -53,7 +57,7 @@ export default function Board_bottom({ color_p1, color_p2, player_turn, game_dra
                 </svg>
             </div>
             <div className='bottom_game_finish'>
-                <p>player {turn_player.current}</p>
+                <p>player {turn_player}</p>
                 <strong>wins</strong>
                 <Link onClick={() => { window.location.reload(false) }} onMouseEnter={btn_enter} onMouseLeave={btn_leave} to='/game'>play again</Link>
             </div>
