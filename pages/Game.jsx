@@ -430,7 +430,7 @@ export default function Game() {
 
                     <Board_black />
 
-                    <Board_bottom player_turn={player_turn} game_draw={game_draw} ref_use={board_bottomRef} />
+                    <Board_bottom player_turn={player_turn} game_draw={game_draw} ref_use={board_bottomRef} restart_func={restart_game}/>
                 </div>
             </div>
 

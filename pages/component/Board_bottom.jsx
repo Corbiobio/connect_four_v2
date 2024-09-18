@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ColorContext } from "./ColorContext"
 
-export default function Board_bottom({ player_turn, game_draw, ref_use }) {
+export default function Board_bottom({ player_turn, game_draw, ref_use, restart_func}) {
 
     const color = useContext(ColorContext)
 
@@ -59,11 +59,11 @@ export default function Board_bottom({ player_turn, game_draw, ref_use }) {
             <div className='bottom_game_finish'>
                 <p>player {turn_player}</p>
                 <strong>wins</strong>
-                <Link onClick={() => { window.location.reload(false) }} onMouseEnter={btn_enter} onMouseLeave={btn_leave} to='/game'>play again</Link>
+                <button onClick={()=>{restart_func();}} onMouseEnter={btn_enter} onMouseLeave={btn_leave}>play again</button>
             </div>
             <div className='bottom_game_finish'>
                 <strong>Draw</strong>
-                <Link onClick={() => { window.location.reload(false) }} onMouseEnter={btn_enter} onMouseLeave={btn_leave} to='/game'>play again</Link>
+                <button onClick={()=>{restart_func();}} onMouseEnter={btn_enter} onMouseLeave={btn_leave} >play again</button>
             </div>
         </div>
     )

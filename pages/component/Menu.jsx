@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ColorContext } from "./ColorContext"
 
 export default function Menu(restart_func) {
-    console.log(restart_func);
+
     const color = useContext(ColorContext)
 
     function continue_btn_click() {
@@ -27,7 +27,7 @@ export default function Menu(restart_func) {
             <div className='menu_btn_container' id='menu_btn_container'>
                 <p>pause</p>
                 <div onClick={continue_btn_click} className='btn_menu'>continue game</div>
-                <div onClick={restart_func.restart_func} className='btn_menu'>restart</div>
+                <div onClick={()=>{restart_func.restart_func(); continue_btn_click();}} className='btn_menu'>restart</div>
                 <Link className='btn_menu btn_menu_colored' to="/connect_four_v2" style={{ backgroundColor: color.ColorP1 }}>quit game</Link>
             </div>
         </div>
